@@ -27,11 +27,11 @@ test("register an empty module", function () {
     ok(mo.modules['test-module'] != null, "Module should be registered");
 });
 
-test("prevent adding module named 'register'", function () {
-    throws(function () {
-        moduler('register', {});
-    }, "throws when adding module named 'register'")
-});
+//test("prevent adding module named 'register'", function () {
+//    throws(function () {
+//        moduler('register', {});
+//    }, "throws when adding module named 'register'")
+//});
 
 test("register a module that has an 'init' method", function () {
     var initFired = false;
@@ -42,9 +42,9 @@ test("register a module that has an 'init' method", function () {
         }
     });
 
-    mo.addModuleToElement('#div1', 'test-module');
+    mo.utils.addModuleToElement('#div1', 'test-module');
 
-    notEqual(mo.getState('#div1', 'test-module'), null, 'Module is initalized')
+    notEqual(mo.utils.getModule('#div1', 'test-module'), null, 'Module is initalized')
     equal(initFired, true, "Init method has fired")
 });
 
@@ -57,9 +57,9 @@ test("adding a second module to element", function () {
         }
     });
 
-    mo.addModuleToElement('#app', 'test-module');
+    mo.utils.addModuleToElement('#app', 'test-module');
 
-    notEqual(mo.getState('#app', 'test-module'), null, 'Module is initalized')
+    notEqual(mo.utils.getModule('#app', 'test-module'), null, 'Module is initalized')
     equal(initFired, true, "Init method has fired")
 });
 
@@ -72,8 +72,8 @@ test("adding a module two times to element should not run it twice", function ()
         }
     });
 
-    mo.addModuleToElement('#div1', 'test-module');
-    mo.addModuleToElement('#div1', 'test-module');
+    mo.utils.addModuleToElement('#div1', 'test-module');
+    mo.utils.addModuleToElement('#div1', 'test-module');
 });
 
 
@@ -86,7 +86,7 @@ test("invalid formated settings attribute should throw error", function () {
         }
     });
 
-    mo.addModuleToElement('#div1', 'test-module', false);
+    mo.utils.addModuleToElement('#div1', 'test-module', false);
 
     // properties without quotes are not valid in JSON
     $('#div1').attr('data-test-module', '{ hello: 1 }');
@@ -104,7 +104,7 @@ test("settings is an empty object if no settings entered and no defaults", funct
         }
     });
 
-    mo.addModuleToElement('#div1', 'test-module');
+    mo.utils.addModuleToElement('#div1', 'test-module');
 });
 
 test("settings are unique to each element", function () {
@@ -117,8 +117,8 @@ test("settings are unique to each element", function () {
         }
     });
 
-    mo.addModuleToElement('#div1', 'test-module', { name: 'Jane Doe' }, false);
-    mo.addModuleToElement('#div2', 'test-module', { name: 'Plain Joe' });
+    mo.utils.addModuleToElement('#div1', 'test-module', { name: 'Jane Doe' }, false);
+    mo.utils.addModuleToElement('#div2', 'test-module', { name: 'Plain Joe' });
 });
 
 test("settings extend from default values", function () {
@@ -133,7 +133,7 @@ test("settings extend from default values", function () {
         }
     });
 
-    mo.addModuleToElement('#div1', 'test-module', { name: 'Jane Doe' });
+    mo.utils.addModuleToElement('#div1', 'test-module', { name: 'Jane Doe' });
 });
 
 test("get settings for element and module", function () {
@@ -145,9 +145,9 @@ test("get settings for element and module", function () {
         init: function (module) { }
     });
 
-    mo.addModuleToElement('#div1', 'test-module', { name: 'Jane Doe' });
+    mo.utils.addModuleToElement('#div1', 'test-module', { name: 'Jane Doe' });
 
-    var settings = mo.getSettings('#div1', 'test-module');
+    var settings = mo.utils.getSettings('#div1', 'test-module');
     equal(settings.name, 'Jane Doe', 'Name is equal to Jane Doe');
     equal(settings.age, 30, 'Age is equal to 30');
 });
@@ -173,7 +173,7 @@ asyncTest("module with listen events", function () {
             })
         }
     });
-    mo.addModuleToElement('#div1', 'test-module');
+    mo.utils.addModuleToElement('#div1', 'test-module');
 
     $('#div1').trigger('helloWorld', ['hello']);
 });
@@ -196,9 +196,9 @@ asyncTest("calling event functions directly", function () {
             })
         }
     });
-    mo.addModuleToElement('#div1', 'test-module');
+    mo.utils.addModuleToElement('#div1', 'test-module');
 
-    testModule.listen.helloWorld(mo.getState('#div1', 'test-module'), null, 'hello');
+    testModule.listen.helloWorld(mo.utils.getModule('#div1', 'test-module'), null, 'hello');
 });
 
 
