@@ -59,7 +59,7 @@ test("adding a second module to element", function () {
 
     mo.utils.addModuleToElement('#app', 'test-module');
 
-    notEqual(mo.utils.getModule('#app', 'test-module'), null, 'Module is initalized')
+    notEqual(mo.utils.getModule('#app', 'test-module'), false, 'Module is initalized')
     equal(initFired, true, "Init method has fired")
 });
 

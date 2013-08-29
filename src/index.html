@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <title>Moduler.js</title>
+        <meta name="viewport" content="width=device-width">
+		<style>
+			.red { background: red; }
+			.green { background: green; }
+		</style>
+    </head>
+    <body data-module="app">
+		<h1>Moduler.js</h1>
+		
+		<h3 data-module="cool" data-loader='{ "url": "/start/child", "contentElement": "#child", "loadOnInit": true }'>This is some good shit</h3>
+		<div id="child"></div>
+		
+		<hr />
+		
+		<h3 data-module="cool" data-loader='{ "url": "/start/superChild", "contentElement": "#child2" }'>This is other stuff</h3>
+		<div id="child2"></div>
+		
+		<div class="log"></div>
+		
+		<!-- library scripts -->
+		<script src="libs/jquery-1.10.2.min.js"></script>
+		<script src="moduler.js"></script>
+		
+		<!-- modules -->
+		<script src="modules/loader.js"></script>
+		<script src="modules/cool.js"></script>
+
+    </body>
+</html>
