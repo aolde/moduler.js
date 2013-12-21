@@ -51,15 +51,15 @@ test("register a module that has an 'init' method", function () {
 test("adding a second module to element", function () {
     var initFired = false;
 
-    moduler('test-module', {
+    moduler('test-second-module', {
         init: function () {
             initFired = true;
         }
     });
 
-    mo.utils.addModuleToElement('#app', 'test-module');
+    mo.utils.addModuleToElement('#app', 'test-second-module');
 
-    notEqual(mo.utils.getModule('#app', 'test-module'), false, 'Module is initalized')
+    notEqual(mo.utils.getModule('#app', 'test-second-module'), false, 'Module is initalized')
     equal(initFired, true, "Init method has fired")
 });
 

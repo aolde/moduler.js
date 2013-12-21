@@ -39,7 +39,7 @@
 
             $('[data-module]', container).each(function () {
                 var moduleElement = $(this),
-                    moduleName = moduleElement.data('module'),
+                    moduleName = moduleElement.attr('data-module'),
                     module = mo.modules[moduleName],
                     settings = moduleElement.data(moduleName),
                     hasMultipleModules = moduleName.indexOf(' ') !== -1;
