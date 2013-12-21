@@ -210,14 +210,14 @@ asyncTest("when adding elements to the DOM they should register automatically", 
     moduler('test-module', {
         init: function () {
             ok(true, 'first init method was called');
-        },
+        }
     });
 
     moduler('another-module', {
         init: function () {
             ok(true, 'second init method was called');
             start();
-        },
+        }
     });
 
     $fixture.append('<div data-module="test-module"></div>')
