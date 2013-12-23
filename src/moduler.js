@@ -142,7 +142,7 @@
                     settings = null;
                 }
 
-                loadAfter = loadAfter == null ? true : loadAfter;
+                loadAfter = loadAfter === undefined ? true : loadAfter;
 
                 var $element = $(moduleElement);
                 var modules = $element.attr('data-module');
