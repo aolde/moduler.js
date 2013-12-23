@@ -1,7 +1,11 @@
+# npm/grunt
+build
+node_modules
+moduler-js*.zip
+
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
 [Bb]in/
 [Oo]bj/
-build
 
 # mstest test results
 TestResults
