@@ -42,15 +42,7 @@ module.exports = function(grunt) {
         ]
       }
     },
-    
-    changelog: {
-      main: {
-        options: {
-          dest: 'build/changelog-<%= pkg.version %>.txt'
-        }
-      }
-    },
-    
+        
     qunit: {
       all: ['tests/tests.html']
     }
@@ -62,12 +54,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-changelog');
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-bump');
 
   // Default task(s).
   grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'copy', 'uglify', 'compress']);
-
-
 };
