@@ -38,7 +38,7 @@ module.exports = function(grunt) {
           archive: 'moduler-js-<%= pkg.version %>.zip'
         },
         files: [
-          { src: 'build/**' }
+          { cwd: 'build', src: '**', expand: true }
         ]
       }
     },
