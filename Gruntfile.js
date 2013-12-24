@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     
     jshint: {
-      all: ['src/moduler.js'],
+      all: ['src/moduler.js', 'src/modules/*.js'],
       options: {
         '-W030': true
       }
