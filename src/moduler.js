@@ -66,9 +66,11 @@
         loadModule: function (moduleName, moduleElement, moduleObj, settings) {
             if (typeof (settings) === "string")
                 throw new Error('Settings attribute for module "' + moduleName + '" should be JSON-formated: data-' + moduleName + '=\'{ "property": "value" }\'. Current value ("' + settings + '") is not JSON.');
+            
+            var $moduleElement = $(moduleElement);
 
             // skip if this module has already been initialized on this element
-            if ($(moduleElement).prop('_mo_' + moduleName)) {
+            if ($moduleElement.prop('_mo_' + moduleName)) {
                 return;
             }
 
@@ -79,8 +81,7 @@
                     settings = $.extend({}, moduleObj.defaults, settings);
                 }
 
-                var $moduleElement = $(moduleElement),
-                    moduleState = {
+                var moduleState = {
                         name: moduleName,
                         element: moduleElement,
                         $element: $moduleElement,
@@ -144,8 +145,8 @@
 
                 loadAfter = loadAfter === undefined ? true : loadAfter;
 
-                var $element = $(moduleElement);
-                var modules = $element.attr('data-module');
+                var $element = $(moduleElement),
+                    modules = $element.attr('data-module');
 
                 if (modules) {
                     // module is already there
@@ -158,12 +159,40 @@
                 }
 
                 if (settings) {
-                    $element.attr('data-' + moduleName, JSON.stringify(settings));
+                    var attrModuleName = mo.utils.toHyphenCase(moduleName);
+                    $element.attr('data-' + attrModuleName, JSON.stringify(settings));
                 }
 
                 if (loadAfter) {
                     mo.loadModules($element.parent());
                 }
+            },
+
+            removeModuleFromElement: function (moduleElement, moduleName) {
+                var module = mo.utils.getModule(moduleElement, moduleName);
+                
+                if (!module)
+                    return;
+                
+                // let module clean up event listeners
+                if ('destroy' in module.obj && $.isFunction(module.obj.destroy)) {
+                    module.obj.destroy(module);
+                }
+
+                // remove module prop
+                module.$element.removeProp('_mo_' + moduleName);
+
+                // remove settings attribute if found
+                module.$element.removeAttr('data-' + mo.utils.toHyphenCase(moduleName));
+                module.$element.removeData(moduleName);
+
+                // remove module name from data-module attribute
+                var modules = module.$element.attr('data-module');
+                module.$element.attr('data-module', modules.replace(moduleName, ''));
+            },
+
+            toHyphenCase: function(camelCaseString) {
+                return camelCaseString.replace(/([A-Z])/g, function (letter) { return '-' + letter.toLowerCase(); });
             },
             
             registerDomChangeEvents: function () {
