@@ -178,6 +178,11 @@
                 if ('destroy' in module.obj && $.isFunction(module.obj.destroy)) {
                     module.obj.destroy(module);
                 }
+                
+                // remove any event listeners from listen object
+                if ('listen' in module.obj) {
+                    $(moduleElement === doc.body ? doc : moduleElement).off(module.obj.listen);
+                }
 
                 // remove module prop
                 module.$element.removeProp('_mo_' + moduleName);
