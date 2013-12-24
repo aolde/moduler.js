@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <title>Moduler.js</title>
+        <meta name="viewport" content="width=device-width">
+        <style>
+          .red { background: red; padding: 10px; }
+          .green { background: green; padding: 10px; }
+          .form-loading {
+            background: lightgrey;
+          }
+          .hide { display: none; }
+        </style>
+    </head>
+    <body data-module="app">
+        <h1>Moduler.js - FormPoster module</h1>
+        
+        <form data-module="formPoster" data-form-poster='{ "successModule": "jsonResponseHandler" }' action="http://httpbin.org/get" method="GET">
+            <h2>Form with GET</h2>
+            <p>First name: <input type="text" name="firstname" value="Joe"></p>
+            <p>Last name: <input type="text" name="lastname" value="Doe"></p>
+            <p>Gender: <select name="gender"><option>Male</option><option>Female</option></select></p>
+            <p>Age: <input type="number" min="0" value="25" max="150" name="age"></p>
+            <input type="submit" value="Send" />
+        </form>
+        
+        <hr>
+
+        <div data-module="formPoster">
+            <form action="http://httpbin.org/post" method="POST">
+                <h2>Form with POST</h2>
+                <p>First name: <input type="text" name="firstname" value="Joe"></p>
+                <p>Last name: <input type="text" name="lastname" value="Doe"></p>
+                <p>Gender: <select name="gender"><option>Male</option><option>Female</option></select></p>
+                <p>Age: <input type="number" min="0" value="25" max="150" name="age"></p>
+                <input type="submit" value="Send" />
+            </form>
+        </div>
+
+        <hr>
+
+        <div id="htmlResponse" class="hide2" style="overflow: auto; max-height: 100px; border: 1px solid; padding: 10px;"></div>
+
+        <div data-module="formPoster loader" data-loader='{ "event": "formPoster-done", "url": "/partial.html", "contentElement": "#htmlResponse" }'>
+            <form action="http://httpbin.org/html" method="GET">
+                <h2>Form with HTML response</h2>
+                <p>First name: <input type="text" name="firstname" value="Joe"></p>
+                <input type="submit" value="Send" />
+            </form>
+        </div>
+
+        
+        <!-- library scripts -->
+        <script src="vendor/jquery-1.10.2.min.js"></script>
+        <script src="moduler.js"></script>
+        
+        <!-- modules -->
+        <script src="modules/loader.js"></script>
+        <script src="modules/jsonResponseHandler.js"></script>
+        <script src="modules/formPoster.js"></script>
+    </body>
+</html>
