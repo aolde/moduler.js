@@ -13,9 +13,10 @@
         init: function (module) {
             var settings = module.settings;
 
-            if (settings.event)
+            if (settings.event) {
                 module.$element.on(settings.event + '.loader', mo.data(module), loader.listen.sendRequest);
-            
+            }
+
             if (settings.loadOnInit) {
                 loader.listen.sendRequest(module);
             }
@@ -36,7 +37,7 @@
                 }).always(function () {
                     element.removeClass('loading');
                     
-                    // trigger the module prefixed event that other modules can use.
+                    // trigger the module prefixed event that other modules can use it.
                     element.trigger('loader.' + settings.event);
                 }).done(function (response) {
                     $(settings.contentElement).html(response);
