@@ -5,8 +5,9 @@
         defaults: {
             submitButton: 'input[type=submit], button[type=submit]',
             url: null, // override the form's url. in case you want different url for ajax request.
+            event: 'submit',
             contentElement: null,
-            successModule: null,
+            responseModule: null,
             loadingCssClass: 'form-loading'
         },
 
@@ -17,8 +18,10 @@
                 formMethod = $form.attr('method') || 'POST',
                 url = module.settings.url || $form.attr('action');
 
-            $form.submit(function(e) {
+            module.$element.on(module.settings.event, function(e) {
                 e.preventDefault();
+
+                module.$element.trigger('formPoster-submit');
 
                 // disable button while request is processing
                 $submitButton.prop('disabled', true);
@@ -30,9 +33,9 @@
                     url: url,
                     data: $form.serialize()
                 }).done(function (response, status, xhr) {
-                    if (module.settings.successModule) {
-                        mo.utils.removeModuleFromElement($contentElement, module.settings.successModule);
-                        mo.utils.addModuleToElement($contentElement, module.settings.successModule, { response: response, fromModule: module });
+                    if (module.settings.responseModule) {
+                        mo.utils.removeModuleFromElement($contentElement, module.settings.responseModule);
+                        mo.utils.addModuleToElement($contentElement, module.settings.responseModule, { response: response });
                     } else if (module.settings.contentElement && xhr.getResponseHeader('content-type').indexOf('text/html') !== -1) {
                         $contentElement.html(response);
                     }
