@@ -66,11 +66,11 @@
         loadModule: function (moduleName, moduleElement, moduleObj, settings) {
             if (typeof (settings) === "string")
                 throw new Error('Settings attribute for module "' + moduleName + '" should be JSON-formated: data-' + moduleName + '=\'{ "property": "value" }\'. Current value ("' + settings + '") is not JSON.');
-            
+
             var $moduleElement = $(moduleElement);
 
-            // skip if this module has already been initialized on this element
-            if ($moduleElement.prop('_mo_' + moduleName)) {
+            // skip if this module has no name or has already been initialized on this element
+            if (!moduleName || $moduleElement.prop('_mo_' + moduleName)) {
                 return;
             }
 
