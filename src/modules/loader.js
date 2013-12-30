@@ -4,7 +4,7 @@
     var loader = moduler('loader', {
         defaults: {
             url: '',
-            contentElement: '',
+            contentElement: null,
             event: 'click',
             once: true,
             responseModule: null,
@@ -46,7 +46,7 @@
                     if (module.settings.responseModule) {
                         mo.utils.removeModuleFromElement($contentElement, module.settings.responseModule);
                         mo.utils.addModuleToElement($contentElement, module.settings.responseModule, { response: response });
-                    } else if (module.settings.contentElement && xhr.getResponseHeader('content-type').indexOf('text/html') !== -1) {
+                    } else if ($contentElement.length && xhr.getResponseHeader('content-type').indexOf('text/html') !== -1) {
                         $contentElement.html(response);
                     }
 
