@@ -12,17 +12,19 @@
         },
 
         init: function(module) {
-            var $form = module.$element.is('form') ? module.$element : module.$element.find('form'),
-                $submitButton = $form.find(module.settings.submitButton),
-                $contentElement = module.settings.contentElement !== null ? $(module.settings.contentElement) : module.$element,
-                formMethod = $form.attr('method') || 'POST',
-                url = module.settings.url || $form.attr('action');
+            module.$element.on(module.settings.event, mo.data(module), moduleObj.listen.sendForm);
+        },
 
-            module.$element.on(module.settings.event, function(e) {
+        listen: {
+            sendForm: mo.event(function (module, e) {
+                var $form = module.$element.is('form') ? module.$element : module.$element.find('form'),
+                    $submitButton = $form.find(module.settings.submitButton),
+                    $contentElement = module.settings.contentElement !== null ? $(module.settings.contentElement) : module.$element,
+                    formMethod = $form.attr('method') || 'POST',
+                    url = module.settings.url || $form.attr('action');
+
                 e.preventDefault();
-
-                module.$element.trigger('form-poster-submit');
-
+                
                 // disable button while request is processing
                 $submitButton.prop('disabled', true);
                 module.$element.addClass(module.settings.loadingCssClass);
@@ -47,7 +49,11 @@
                 }).error(function () {
                     module.$element.trigger('form-poster-error');
                 });
-            });
+            })
+        },
+
+        destroy: function (module) {
+            module.$element.off(module.settings.event, moduleObj.listen.sendForm);
         }
     });
 
