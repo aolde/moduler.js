@@ -21,7 +21,7 @@
             module.$element.on(module.settings.event, function(e) {
                 e.preventDefault();
 
-                module.$element.trigger('formPoster-submit');
+                module.$element.trigger('form-poster-submit');
 
                 // disable button while request is processing
                 $submitButton.prop('disabled', true);
@@ -43,9 +43,9 @@
                         $contentElement.html(response);
                     }
 
-                    module.$element.trigger('formPoster-done', { response: response });
+                    module.$element.trigger('form-poster-done', { response: response });
                 }).error(function () {
-                    module.$element.trigger('formPoster-error');
+                    module.$element.trigger('form-poster-error');
                 });
             });
         }

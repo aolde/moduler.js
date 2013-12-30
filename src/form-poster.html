@@ -2,7 +2,7 @@
 <html lang="en-us">
     <head>
         <meta charset="utf-8">
-        <title>Moduler.js</title>
+        <title>Moduler.js - Form Poster</title>
         <meta name="viewport" content="width=device-width">
         <style>
           .red { background: red; padding: 10px; }
@@ -11,15 +11,16 @@
             background: lightgrey;
           }
           .hide { display: none; }
+          .field-validation-error { background: rgba(255, 0, 0, 0.3);; }
         </style>
     </head>
     <body data-module="app">
-        <h1>Moduler.js - FormPoster module</h1>
-        
-        <form data-module="formPoster" data-form-poster='{ "successModule": "jsonResponseHandler" }' action="http://httpbin.org/get" method="GET">
+        <h1>Moduler.js - form-poster module</h1>
+
+        <form data-module="form-poster validation" data-form-poster='{ "successModule": "jsonResponseHandler", "event": "validation-valid" }' action="http://httpbin.org/get" method="GET">
             <h2>Form with GET</h2>
-            <p>First name: <input type="text" name="firstname" value="Joe"></p>
-            <p>Last name: <input type="text" name="lastname" value="Doe"></p>
+            <p>First name:* <input type="text" class="required" name="firstname" value="Joe"></p>
+            <p>Last name:* <input type="text" class="required" name="lastname" value="Doe"></p>
             <p>Gender: <select name="gender"><option>Male</option><option>Female</option></select></p>
             <p>Age: <input type="number" min="0" value="25" max="150" name="age"></p>
             <input type="submit" value="Send" />
@@ -58,6 +59,8 @@
         <!-- modules -->
         <script src="modules/loader.js"></script>
         <script src="modules/jsonResponseHandler.js"></script>
-        <script src="modules/formPoster.js"></script>
+        <script src="modules/background.js"></script>
+        <script src="modules/validation.js"></script>
+        <script src="modules/form-poster.js"></script>
     </body>
 </html>
