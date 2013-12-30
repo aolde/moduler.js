@@ -41,12 +41,35 @@ http.createServer(function(request, response) {
       if (!mimeType) {
         mimeType = 'text/plain';
       }
+
+      var headers = { "Content-Type": mimeType };
       
-      response.writeHead(200, { "Content-Type": mimeType });
-      response.write(file, "binary");
-      response.end();
+      preResponse(filename, headers, function () {
+        response.writeHead(200, headers);
+        response.write(file, "binary");
+        response.end();
+      });
+
     });
   });
 }).listen(parseInt(port, 10));
+
+/* special handling for this project */
+
+function preResponse(filename, headers, callback) {
+  // add X-LastPage header for last page. used by load-more.js
+  if (filename.indexOf('page-3') > -1) {
+    headers["X-LastPage"] = true;
+  }
+
+  // simulate delay for all filenames containing "page-"
+  if (filename.indexOf('page-') > -1) {
+    setTimeout(function () {
+      callback();
+    }, 1000);
+  } else {
+    callback();
+  }
+}
 
 console.log("Static file server running at\n  => http://localhost:" + port + "/\nCTRL + C to shutdown");
