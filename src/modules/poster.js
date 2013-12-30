@@ -14,8 +14,7 @@
         },
         
         init: function (module) {
-            var bind = module.$element[module.settings.once ? "one" : "on"];
-            bind(module.settings.event, mo.data(module), moduleObj.listen.fireRequest);
+            module.$element[module.settings.once ? "one" : "on"](module.settings.event, mo.data(module), moduleObj.listen.fireRequest);
         },
 
         listen: {
