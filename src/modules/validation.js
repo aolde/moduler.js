@@ -30,7 +30,7 @@
                     module.$element.trigger('validation-valid');
                 }
             })
-        }
+        },
 
         destroy: function (module) {
         	module.$element.off('submit.validation');
