@@ -35,7 +35,7 @@
                     if (settings.responseModule) {
                         mo.utils.removeModuleFromElement($contentElement, settings.responseModule);
                         mo.utils.addModuleToElement($contentElement, settings.responseModule, { response: response });
-                    } else if (settings.contentElement && xhr.getResponseHeader('content-type').indexOf('text/html') !== -1) {
+                    } else if ($contentElement.length && xhr.getResponseHeader('content-type').indexOf('text/html') !== -1) {
                         $contentElement.html(response);
                     }
 
