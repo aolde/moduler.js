@@ -1,14 +1,14 @@
 (function () {
     "use strict";
 
-    var m = moduler('confirm', {
+    var moduleObj = moduler('confirm', {
         defaults: {
             message: 'Are you sure you want to perform this action?',
             event: 'click'
         },
         
         init: function (module) {
-            module.$element.on(module.settings.event, mo.data(module), m.listen.showConfirm);
+            module.$element.on(module.settings.event, mo.data(module), moduleObj.listen.showConfirm);
         },
 
         listen: {
@@ -24,7 +24,7 @@
         },
         
         destroy: function () {
-            module.$element.off(module.settings.event, m.listen.showConfirm);
+            module.$element.off(module.settings.event, moduleObj.listen.showConfirm);
         }
     });
     
