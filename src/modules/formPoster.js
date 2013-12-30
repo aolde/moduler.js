@@ -4,7 +4,7 @@
     var formPoster = moduler('formPoster', {
         defaults: {
             submitButton: 'input[type=submit], button[type=submit]',
-            url: null, // override the form's url. in case you want different url for ajax request.
+            url: null, // override the form's url. in case you want different url for ajax requests.
             event: 'submit',
             contentElement: null,
             responseModule: null,
@@ -32,6 +32,9 @@
                     type: formMethod,
                     url: url,
                     data: $form.serialize()
+                }).always(function () {
+                    $submitButton.prop('disabled', false);
+                    module.$element.removeClass(module.settings.loadingCssClass);
                 }).done(function (response, status, xhr) {
                     if (module.settings.responseModule) {
                         mo.utils.removeModuleFromElement($contentElement, module.settings.responseModule);
@@ -40,9 +43,7 @@
                         $contentElement.html(response);
                     }
 
-                    $submitButton.prop('disabled', false);
-                    module.$element.removeClass(module.settings.loadingCssClass);
-                    module.$element.trigger('formPoster-done');
+                    module.$element.trigger('formPoster-done', { response: response });
                 }).error(function () {
                     module.$element.trigger('formPoster-error');
                 });
