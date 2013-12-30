@@ -7,7 +7,9 @@
             contentElement: '',
             event: 'click',
             once: true,
-            loadOnInit: false
+            responseModule: null,
+            loadOnInit: false,
+            loadingCssClass: 'loading'
         },
         
         init: function (module) {
@@ -25,25 +27,31 @@
         listen: {
             sendRequest: mo.event(function(module) {
                 var settings = module.settings,
-                    element = module.$element;
+                    element = module.$element,
+                    $contentElement = module.settings.contentElement !== null ? $(module.settings.contentElement) : module.$element;
 
                 if (settings.once && module.isLoaded)
                     return;
 
-                element.addClass('loading');
+                element.addClass(settings.loadingCssClass);
 
                 $.ajax({
                     url: settings.url
                 }).always(function () {
-                    element.removeClass('loading');
+                    element.removeClass(settings.loadingCssClass);
                     
                     // trigger the module prefixed event that other modules can use it.
-                    element.trigger('loader.' + settings.event);
-                }).done(function (response) {
-                    $(settings.contentElement).html(response);
+                    element.trigger('loader-' + settings.event);
+                }).done(function (response, status, xhr) {
+                    if (module.settings.responseModule) {
+                        mo.utils.removeModuleFromElement($contentElement, module.settings.responseModule);
+                        mo.utils.addModuleToElement($contentElement, module.settings.responseModule, { response: response });
+                    } else if (module.settings.contentElement && xhr.getResponseHeader('content-type').indexOf('text/html') !== -1) {
+                        $contentElement.html(response);
+                    }
 
                     module.isLoaded = true;
-                    element.trigger('loaded');
+                    element.trigger('loader-done', { response: response });
                 });
 
                 if (settings.once && settings.event) {
