@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <title>Moduler.js - Load More</title>
+        <meta name="viewport" content="width=device-width">
+        <style>
+          .red { background: red; padding: 10px; }
+          .green { background: green; padding: 10px; }
+          
+          a.loading { text-decoration: none; }
+          a.loading:after { content: '...'; }
+          
+          .hide { display: none; }
+          .field-validation-error { background: rgba(255, 0, 0, 0.3);; }
+        </style>
+    </head>
+    <body data-module="app">
+        <h1>Moduler.js - load-more module</h1>
+        
+        <h2>Paging using mode=append</h2>
+        <div class="news-articles-append" data-module="loader" data-loader='{ "url": "_page-1.html", "loadOnInit": true }'>
+            Loading...
+        </div>
+        
+        <p>
+            <a href="_page-2.html" data-module="load-more" data-load-more='{ "url": "_page-{page}.html", "contentElement": ".news-articles-append", "mode": "append" }'>
+                Load next page
+            </a>
+        </p>
+        
+        <hr>
+
+        <h2>Paging using mode=replace</h2>
+        <div class="news-articles-replace" data-module="loader" data-loader='{ "url": "_page-1.html", "loadOnInit": true }'>
+            Loading...
+        </div>
+        
+        <p>
+            <a href="_page-2.html" data-module="load-more" data-load-more='{ "url": "_page-{page}.html", "contentElement": ".news-articles-replace", "mode": "replace" }'>
+                Load next page
+            </a>
+        </p>
+        
+
+        <!-- library scripts -->
+        <script src="../vendor/jquery-1.10.2.min.js"></script>
+        <script src="../moduler.js"></script>
+        
+        <!-- modules -->
+        <script src="../app.js"></script>
+        <script src="../modules/loader.js"></script>
+        <script src="../modules/background.js"></script>
+        <script src="../modules/confirm.js"></script>
+        <script src="../modules/load-more.js"></script>
+    </body>
+</html>
