@@ -14,7 +14,8 @@
         },
         
         init: function (module) {
-            module.$element[module.settings.once ? "one" : "on"](module.settings.event, mo.data(module), moduleObj.listen.fireRequest);
+            var bindMethod = module.settings.once ? "one" : "on";
+            module.$element[bindMethod](module.settings.event, mo.data(module), moduleObj.listen.fireRequest);
         },
 
         listen: {
