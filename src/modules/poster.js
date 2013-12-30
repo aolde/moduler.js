@@ -6,6 +6,7 @@
             url: null,
             event: 'click',
             data: undefined,
+            once: false,
             contentElement: null,
             responseModule: null,
             httpMethod: 'POST',
@@ -13,7 +14,8 @@
         },
         
         init: function (module) {
-            module.$element.on(module.settings.event, mo.data(module), moduleObj.listen.fireRequest);
+            var bind = module.$element[module.settings.once ? "one" : "on"];
+            bind(module.settings.event, mo.data(module), moduleObj.listen.fireRequest);
         },
 
         listen: {
