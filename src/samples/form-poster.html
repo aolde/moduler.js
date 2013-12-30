@@ -14,7 +14,7 @@
           .field-validation-error { background: rgba(255, 0, 0, 0.3);; }
         </style>
     </head>
-    <body data-module="app">
+    <body>
         <h1>Moduler.js - form-poster module</h1>
 
         <form data-module="form-poster validation" data-form-poster='{ "successModule": "jsonResponseHandler", "event": "validation-valid" }' action="http://httpbin.org/get" method="GET">
@@ -28,7 +28,7 @@
         
         <hr>
 
-        <div data-module="formPoster">
+        <div data-module="form-poster">
             <form action="http://httpbin.org/post" method="POST">
                 <h2>Form with POST</h2>
                 <p>First name: <input type="text" name="firstname" value="Joe"></p>
@@ -43,7 +43,7 @@
 
         <div id="htmlResponse" class="hide2" style="overflow: auto; max-height: 100px; border: 1px solid; padding: 10px;"></div>
 
-        <div data-module="formPoster loader" data-loader='{ "event": "formPoster-done", "url": "/partial.html", "contentElement": "#htmlResponse" }'>
+        <div data-module="form-poster loader" data-loader='{ "event": "form-poster-done", "url": "/partial.html", "contentElement": "#htmlResponse" }'>
             <form action="http://httpbin.org/html" method="GET">
                 <h2>Form with HTML response</h2>
                 <p>First name: <input type="text" name="firstname" value="Joe"></p>
@@ -53,14 +53,14 @@
 
         
         <!-- library scripts -->
-        <script src="vendor/jquery-1.10.2.min.js"></script>
-        <script src="moduler.js"></script>
+        <script src="../vendor/jquery-1.10.2.min.js"></script>
+        <script src="../moduler.js"></script>
         
         <!-- modules -->
-        <script src="modules/loader.js"></script>
-        <script src="modules/jsonResponseHandler.js"></script>
-        <script src="modules/background.js"></script>
-        <script src="modules/validation.js"></script>
-        <script src="modules/form-poster.js"></script>
+        <script src="../modules/loader.js"></script>
+        <script src="../modules/jsonResponseHandler.js"></script>
+        <script src="../modules/background.js"></script>
+        <script src="../modules/validation.js"></script>
+        <script src="../modules/form-poster.js"></script>
     </body>
 </html>

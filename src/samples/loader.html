@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <title>Moduler.js - Loader</title>
+        <meta name="viewport" content="width=device-width">
+        <style>
+          .red { background: red; padding: 10px; }
+          .green { background: green; padding: 10px; }
+          .form-loading {
+            background: lightgrey;
+          }
+          .hide { display: none; }
+          .field-validation-error { background: rgba(255, 0, 0, 0.3);; }
+        </style>
+    </head>
+    <body>
+        <h1>Moduler.js - Loader module</h1>
+        
+        <h2>Load file on init</h2>
+        <div data-module="loader" data-loader='{ "url": "_partial.html", "loadOnInit": true }'></div>
+        
+        <hr>
+
+        <div data-module="form-poster loader" data-loader='{ "event": "form-poster-done", "url": "_partial.html", "contentElement": "#htmlResponse" }'>
+            <form action="http://httpbin.org/html" method="GET">
+                <h2>Load partial.html after form has been sent</h2>
+                <p>First name: <input type="text" name="firstname" value="Joe"></p>
+                <input type="submit" value="Send" />
+            </form>
+        </div>
+        <div id="htmlResponse" class="hide2" style="overflow: auto; max-height: 100px; border: 1px solid; padding: 10px;"></div>
+
+        
+        <!-- library scripts -->
+        <script src="../vendor/jquery-1.10.2.min.js"></script>
+        <script src="../moduler.js"></script>
+        
+        <!-- modules -->
+        <script src="../modules/loader.js"></script>
+        <script src="../modules/jsonResponseHandler.js"></script>
+        <script src="../modules/background.js"></script>
+        <script src="../modules/validation.js"></script>
+        <script src="../modules/form-poster.js"></script>
+    </body>
+</html>
