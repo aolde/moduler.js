@@ -12,20 +12,40 @@
     <body data-module="app">
         <h1>Moduler.js</h1>
         
-        <button data-module="loader" data-loader='{ "url": "partial.html", "contentElement": "#child", "loadOnInit": true }'>Load partial.html</button>
-        <div id="child"></div>
-        
-        <hr />
-        
-        <button data-module="loader" data-loader='{ "url": "partial.html", "contentElement": "#child2" }'>Load partial.html</button>
-        <div id="child2"></div>
+        <h2>Modules</h2>
+        <ul>
+            <li>Accordion</li>
+            <li>Tabs</li>
+            <li>Notification</li>
+            <li>Modal</li>
+            <li><a href="samples/confirm.html">Confirm</a></li>
+            <li>Toggler</li>
+            <li><a href="samples/validation.html">Validation</a></li>
+            <li><a href="samples/poster.html">Poster</a></li>
+            <li><a href="samples/loader.html">Loader</a></li>
+            <li><a href="samples/form-poster.html">Form Poster</a></li>
+            <li><a href="samples/load-more.html">Load more</a></li>
+            <li>Analytics Events</li>
+        </ul>
+
+        <h3>Low priority modules</h3>
+        <ul>
+            <li>Templating</li>
+        </ul>
+
+        <ul>
+            <li>Add ignoreResponse to loader and poster</li>
+        </ul>
             
         <!-- library scripts -->
         <script src="vendor/jquery-1.10.2.min.js"></script>
         <script src="moduler.js"></script>
         
         <!-- modules -->
+        <script src="app.js"></script>
         <script src="modules/loader.js"></script>
+        <script src="modules/poster.js"></script>
+        <script src="modules/confirm.js"></script>
         <script src="modules/background.js"></script>
     </body>
 </html>
