@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <title>Moduler.js - Confirm</title>
+        <meta name="viewport" content="width=device-width">
+        <style>
+          .red { background: red; padding: 10px; }
+          .green { background: green; padding: 10px; }
+          .form-loading {
+            background: lightgrey;
+          }
+          .hide { display: none; }
+          .field-validation-error { background: rgba(255, 0, 0, 0.3);; }
+        </style>
+    </head>
+    <body>
+        <h1>Moduler.js - Confirm module</h1>
+        
+        <button data-module="poster confirm" data-poster='{ "event": "confirm-yes", "url": "_partial.html", "once": true, "data": { "hello": "world" } }'>Send request</button><br>
+        
+        <!-- library scripts -->
+        <script src="../vendor/jquery-1.10.2.min.js"></script>
+        <script src="../moduler.js"></script>
+        
+        <!-- modules -->
+        <script src="../modules/loader.js"></script>
+        <script src="../modules/json-response.js"></script>
+        <script src="../modules/background.js"></script>
+        <script src="../modules/validation.js"></script>
+        <script src="../modules/form-poster.js"></script>
+        <script src="../modules/confirm.js"></script>
+        <script src="../modules/poster.js"></script>
+    </body>
+</html>
