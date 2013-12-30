@@ -33,7 +33,7 @@
         },
 
         destroy: function (module) {
-        	module.$element.off('submit.validation');
+            module.$element.off('submit.validation');
         }
     });
     
