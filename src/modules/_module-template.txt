@@ -1,0 +1,16 @@
+(function () {
+    "use strict";
+
+    var moduleObj = moduler('module-name', {
+        defaults: {},
+        
+        init: function (module) {
+            
+        },
+        
+        listen: { },
+        
+        destroy: function (module) { }
+    });
+    
+})();
