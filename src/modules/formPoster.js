@@ -1,7 +1,7 @@
 ﻿(function($) {
     "use strict";
 
-    var formPoster = moduler('formPoster', {
+    var moduleObj = moduler('form-poster', {
         defaults: {
             submitButton: 'input[type=submit], button[type=submit]',
             url: null, // override the form's url. in case you want different url for ajax requests.
