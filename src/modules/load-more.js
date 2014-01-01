@@ -23,7 +23,7 @@
             // save a reference to contentElement
             module.$contentElement = module.settings.contentElement !== null ? $(module.settings.contentElement) : module.$element;
 
-            module.$element.on(module.settings.event, mo.data(module), moduleObj.listen.loadMore);
+            module.$element.on(module.settings.event, module, moduleObj.listen.loadMore);
         },
 
         listen: {

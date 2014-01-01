@@ -9,7 +9,7 @@
         },
     
         init: function (module) {
-            $(module.element).on('click', mo.data(module), moduleObj.listen.toggle);
+            module.$element.on('click', module, moduleObj.listen.toggle);
             moduleObj.listen.toggle(module);
         },
 

@@ -12,7 +12,7 @@
         },
 
         init: function(module) {
-            module.$element.on(module.settings.event, mo.data(module), moduleObj.listen.sendForm);
+            module.$element.on(module.settings.event, module, moduleObj.listen.sendForm);
         },
 
         listen: {

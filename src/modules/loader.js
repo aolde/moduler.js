@@ -16,7 +16,7 @@
             var settings = module.settings;
 
             if (settings.event) {
-                module.$element.on(settings.event + '.loader', mo.data(module), loader.listen.sendRequest);
+                module.$element.on(settings.event + '.loader', module, loader.listen.sendRequest);
             }
 
             if (settings.loadOnInit) {

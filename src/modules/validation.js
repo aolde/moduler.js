@@ -6,7 +6,7 @@
 
     var moduleObj = moduler('validation', {
         init: function (module) {
-            module.$element.on('submit.validation', mo.data(module), moduleObj.listen.validate);
+            module.$element.on('submit.validation', module, moduleObj.listen.validate);
         },
 
         listen: {

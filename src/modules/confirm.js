@@ -8,7 +8,7 @@
         },
         
         init: function (module) {
-            module.$element.on(module.settings.event, mo.data(module), moduleObj.listen.showConfirm);
+            module.$element.on(module.settings.event, module, moduleObj.listen.showConfirm);
         },
 
         listen: {
