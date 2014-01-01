@@ -90,7 +90,7 @@
                     };
 
                 if ('listen' in moduleObj) {
-                    $(moduleElement === doc.body ? doc : moduleElement).on(moduleObj.listen, mo.data(moduleState));
+                    $(moduleElement === doc.body ? doc : moduleElement).on(moduleObj.listen, moduleState);
                 }
 
                 moduleObj.init.call(moduleElement, moduleState);
@@ -104,24 +104,21 @@
             return function (event) {
                 if (!(event instanceof jQuery.Event) || !event.data) {
                     var context = this;
+
+                    // parameter is moduleState object
                     if ('element' in event) {
                         context = event.element;
                     }
+                    
                     func.apply(context, arguments);
                     return;
                 }
 
-                var moduleState = event.data.moduleState,
+                var moduleState = event.data,
                     args = [].slice.call(arguments),
                     params = [moduleState].concat(args);
 
                 func.apply(moduleState.element, params);
-            };
-        },
-        
-        data: function (moduleState) {
-            return {
-                moduleState: moduleState
             };
         }
     };
