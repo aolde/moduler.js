@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <title>Moduler.js - Toggler</title>
+        <meta name="viewport" content="width=device-width">
+        <style>
+          .red { background: red; padding: 10px; }
+          .green { background: green; padding: 10px; }
+          
+          a.loading { text-decoration: none; }
+          a.loading:after { content: '...'; }
+          
+          .hide { display: none; }
+          .field-validation-error { background: rgba(255, 0, 0, 0.3);; }
+        </style>
+    </head>
+    <body data-module="app">
+        <h1>Moduler.js - toggler module</h1>
+        
+        <button data-module="toggler" data-toggler='{ "contentElement": ".article-text" }'>Show/hide content</button>
+        
+        <p class="article-text hide">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+
+        <!-- library scripts -->
+        <script src="../vendor/jquery-1.10.2.min.js"></script>
+        <script src="../moduler.js"></script>
+        
+        <!-- modules -->
+        <script src="../app.js"></script>
+        <script src="../modules/loader.js"></script>
+        <script src="../modules/background.js"></script>
+        <script src="../modules/confirm.js"></script>
+        <script src="../modules/load-more.js"></script>
+        <script src="../modules/toggler.js"></script>
+    </body>
+</html>
