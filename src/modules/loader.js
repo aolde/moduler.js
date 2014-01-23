@@ -9,7 +9,8 @@
             once: true,
             responseModule: null,
             loadOnInit: false,
-            loadingCssClass: 'loading'
+            loadingCssClass: 'loading',
+            insertMode: 'replace', /* replace|append */
         },
         
         init: function (module) {
@@ -47,7 +48,11 @@
                         mo.utils.removeModuleFromElement($contentElement, module.settings.responseModule);
                         mo.utils.addModuleToElement($contentElement, module.settings.responseModule, { response: response });
                     } else if ($contentElement.length && xhr.getResponseHeader('content-type').indexOf('text/html') !== -1) {
-                        $contentElement.html(response);
+                        if (module.settings.insertMode == 'replace') {
+                            $contentElement.html(response);
+                        } else if (module.settings.insertMode == 'append') {
+                            $contentElement.append(response);
+                        }
                     }
 
                     module.isLoaded = true;
