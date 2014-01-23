@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <title>Moduler.js - Accordion</title>
+        <meta name="viewport" content="width=device-width">
+        <style>
+            body {
+                background: #F0F0F0;
+                margin: 1em;
+            }
+            .red { background: red; padding: 10px; }
+            .green { background: green; padding: 10px; }
+
+            /* basic styles for an accordion */
+            .accordion {
+                background: #ACACAC;
+            }
+            .accordion-header { 
+                background: #fff; 
+                padding: 10px; 
+                margin: 0;
+                border-top: 1px solid #666;
+                cursor: pointer;
+                font-weight: normal;
+            }
+            .accordion-header.is-active { font-weight: bold; }
+            .accordion-section { padding: 0 10px; }
+
+            .accordion.js-ready .accordion-section { display: none; }
+            .accordion .accordion-section.is-active { display: block; }
+        </style>
+    </head>
+    <body>
+        <h1>Moduler.js - Accordion module</h1>
+        
+        <button data-module="dispatcher" data-dispatcher='{ "triggerEvent": "expandAll", "triggerSelector": ".accordion", "triggerContext": "parent" }'>Expand All</button>
+        <button data-module="dispatcher" data-dispatcher='{ "triggerEvent": "collapseAll", "triggerSelector": ".accordion", "triggerContext": "parent" }'>Collapse All</button>
+        
+        <h2>Accordion with sliding animation</h2>
+        <div class="accordion" data-module="accordion" data-accordion='{ "expandFirst": true }'>
+          <h3 class="accordion-header">Section 1</h3>
+          <div class="accordion-section">
+            <p>
+                Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+          </div>
+          <h3 class="accordion-header">Section 2</h3>
+          <div class="accordion-section" data-module="loader" data-loader='{ "url": "_partial.html", "event": "accordion-expand", "contentElement": ".accordion-loader-1" }'>
+            <p>
+                Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                suscipit faucibus urna.
+            </p>
+            <h4>Loading content on accordion-expand event</h4>
+            <div class="accordion-loader-1"></div>
+          </div>
+          <h3 class="accordion-header">Section 3</h3>
+          <div class="accordion-section">
+            <p>
+                Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+                ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+                lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+            </p>
+            <ul>
+              <li>List item one</li>
+              <li>List item two</li>
+              <li>List item three</li>
+            </ul>
+          </div>
+          <h3 class="accordion-header">Section 4</h3>
+          <div class="accordion-section">
+            <p>
+                Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+                et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+                faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+                mauris vel est.
+            </p>
+            <p>
+                Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                inceptos himenaeos.
+            </p>
+          </div>
+        </div>
+
+
+        <h2>Accordion with CSS class toggle</h2>
+        <div class="accordion" data-module="accordion" data-accordion='{ "slide": false }'>
+          <h3 class="accordion-header">Section 1</h3>
+          <div class="accordion-section">
+            <p>
+                Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+          </div>
+          <h3 class="accordion-header">Section 2</h3>
+          <div class="accordion-section">
+            <p>
+                Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                suscipit faucibus urna.
+            </p>
+          </div>
+          <h3 class="accordion-header">Section 3</h3>
+          <div class="accordion-section">
+            <p>
+                Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+                ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+                lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+            </p>
+            <ul>
+              <li>List item one</li>
+              <li>List item two</li>
+              <li>List item three</li>
+            </ul>
+          </div>
+          <h3 class="accordion-header">Section 4</h3>
+          <div class="accordion-section">
+            <p>
+                Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+                et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+                faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+                mauris vel est.
+            </p>
+            <p>
+                Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                inceptos himenaeos.
+            </p>
+          </div>
+        </div>
+
+
+        <h2>Accordion that allows multiple open sections</h2>
+        <div class="accordion" data-module="accordion" data-accordion='{ "slide": true, "mode": "toggle" }'>
+          <h3 class="accordion-header">Section 1</h3>
+          <div class="accordion-section">
+            <p>
+                Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+          </div>
+          <h3 class="accordion-header">Section 2</h3>
+          <div class="accordion-section">
+            <p>
+                Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                suscipit faucibus urna.
+            </p>
+          </div>
+          <h3 class="accordion-header">Section 3</h3>
+          <div class="accordion-section">
+            <p>
+                Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+                ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+                lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+            </p>
+            <ul>
+              <li>List item one</li>
+              <li>List item two</li>
+              <li>List item three</li>
+            </ul>
+          </div>
+          <h3 class="accordion-header">Section 4</h3>
+          <div class="accordion-section">
+            <p>
+                Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+                et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+                faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+                mauris vel est.
+            </p>
+            <p>
+                Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                inceptos himenaeos.
+            </p>
+          </div>
+        </div>
+
+        
+        <!-- library scripts -->
+        <script src="../vendor/jquery-1.10.2.min.js"></script>
+        <script src="../moduler.js"></script>
+        
+        <!-- modules -->
+        <script src="../modules/accordion.js"></script>
+        <script src="../modules/dispatcher.js"></script>
+        <script src="../modules/background.js"></script>
+        <script src="../modules/loader.js"></script>
+    </body>
+</html>
