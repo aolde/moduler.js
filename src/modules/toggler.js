@@ -9,7 +9,7 @@
         },
 
         init: function (module) {
-            module.$contentElement = $(module.settings.contentElement);
+            module.$contentElement = $(module.settings.contentElement ? module.settings.contentElement : module.element);
             module.$element.on(module.settings.event, module, moduleObj.listen.toggleVisibility);
         },
 
