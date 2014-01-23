@@ -7,7 +7,7 @@
             event: 'click',
             contentElement: null, /* selector for element where content should be appended or replaced */
             page: 1, /* the page currently on */
-            mode: 'append', /* append|replace */
+            insertMode : 'append', /* append|replace */
             loadingCssClass: 'loading'
         },
 
@@ -54,9 +54,9 @@
                     module.isLoading = false;
                 })
                 .done(function (response, status, xhr) {
-                    if (module.settings.mode == 'replace') {
+                    if (module.settings.insertMode == 'replace') {
                         module.$contentElement.html(response);
-                    } else if (module.settings.mode == 'append') {
+                    } else if (module.settings.insertMode == 'append') {
                         module.$contentElement.append(response);
                     }
 
