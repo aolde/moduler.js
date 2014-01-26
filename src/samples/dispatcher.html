@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <title>Moduler.js - Dispatcher</title>
+        <meta name="viewport" content="width=device-width">
+        <style>
+            .red { background: red; padding: 10px; }
+            .green { background: green; padding: 10px; }
+            .test { width: 30%; float: left; margin-right: 3%;}
+            .clear { clear: both; }
+          </style>
+    </head>
+    <body>
+        <h1>Moduler.js - Dispatcher module</h1>
+        <p>Use the dispatcher module to trigger events on other elements.</p>
+
+        <button data-module="dispatcher" data-dispatcher='{ "triggerEvent": "load-content", "triggerSelector": ".content", "triggerContext": "parent" }'>Load partial</button>
+        
+        <div class="content" data-module="loader" data-loader='{ "event": "load-content", "url": "_partial.html" }'></div>
+        
+        <!-- library scripts -->
+        <script src="../vendor/jquery-1.10.2.min.js"></script>
+        <script src="../moduler.js"></script>
+        
+        <!-- modules -->
+        <script src="../modules/accordion.js"></script>
+        <script src="../modules/dispatcher.js"></script>
+        <script src="../modules/background.js"></script>
+        <script src="../modules/loader.js"></script>
+    </body>
+</html>
