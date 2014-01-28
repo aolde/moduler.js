@@ -61,7 +61,9 @@
                     }
 
                     if (xhr.getResponseHeader('X-LastPage')) {
-                        module.$element.remove();
+                        // hide the load more button instead of removing it so that 
+                        // other modules can still trigger events
+                        module.$element.hide();
                     }
 
                     module.$element.trigger('load-more-done', { response: response });
