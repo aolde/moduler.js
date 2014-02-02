@@ -20,8 +20,8 @@
     var moduleObj = moduler('accordion', {
         defaults: {
             event: 'click',
-            headerClass: 'accordion-header',
-            sectionClass: 'accordion-section',
+            headers: '.accordion-header',
+            sections: '.accordion-section',
             activeClass: 'is-active',
             mode: 'accordion', // accordion|toggle
             slide: true,
@@ -30,8 +30,8 @@
         },
         
         init: function (module) {
-            module.$headers = module.$element.find('.' + module.settings.headerClass);
-            module.$sections = module.$element.find('.' + module.settings.sectionClass);
+            module.$headers = module.$element.find(module.settings.headers);
+            module.$sections = module.$element.find(module.settings.sections);
 
             if (module.settings.slide) {
                 module.$sections.hide();
