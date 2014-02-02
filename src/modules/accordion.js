@@ -1,6 +1,22 @@
 (function () {
     "use strict";
 
+    /*
+        Example HTML:
+
+        <div class="accordion" data-module="accordion">
+            <h3 class="accordion-header">Section 1</h3>
+            <div class="accordion-section">
+                <!-- content 1 -->
+            </div>
+
+            <h3 class="accordion-header">Section 2</h3>
+            <div class="accordion-section">
+                <!-- content 2 -->
+            </div>
+        </div>
+    */
+
     var moduleObj = moduler('accordion', {
         defaults: {
             event: 'click',
@@ -76,7 +92,7 @@
         },
         
         destroy: function (module) {
-            module.$headers.off('click', moduleObj.listen.expandSection);
+            module.$headers.off(module.settings.event, moduleObj.listen.expandSection);
         }
     });
     
