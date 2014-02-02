@@ -27,10 +27,10 @@
                 font-weight: normal;
             }
             .accordion-header.is-active { font-weight: bold; }
-            .accordion-section { padding: 0 10px; }
+            .accordion-panel { padding: 0 10px; }
 
-            .accordion.js-ready .accordion-section { display: none; }
-            .accordion .accordion-section.is-active { display: block; }
+            .accordion.js-ready .accordion-panel { display: none; }
+            .accordion .accordion-panel.is-active { display: block; }
         </style>
     </head>
     <body>
@@ -40,16 +40,16 @@
           <button data-module="dispatcher" data-dispatcher='{ "triggerEvent": "expandAll", "triggerSelector": ".accordion", "triggerContext": "body" }'>Expand All</button>
           <button data-module="dispatcher" data-dispatcher='{ "triggerEvent": "collapseAll", "triggerSelector": ".accordion", "triggerContext": "body" }'>Collapse All</button>
           - 
-          <button data-module="dispatcher" data-dispatcher='{ "triggerEvent": "expandSection", "triggerSelector": ".accordion .accordion-header:last", "triggerContext": "body" }'>Toggle Last Section</button>
+          <button data-module="dispatcher" data-dispatcher='{ "triggerEvent": "expandPanel", "triggerSelector": ".accordion .accordion-header:last", "triggerContext": "body" }'>Toggle Last Panel</button>
         </div>
 
         <div class="test">
           <h2>Accordion with sliding animation</h2>
           <div class="accordion" data-module="accordion" data-accordion='{ "expandFirst": true }'>
-            <h3 class="accordion-header">Section 1</h3>
-            <div class="accordion-section">
+            <h3 class="accordion-header">Panel 1</h3>
+            <div class="accordion-panel">
               <p>
-                  This section will be opened automatically on load. 
+                  This panel will be opened automatically on load. 
               </p>
               <p>
                   Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
@@ -58,8 +58,8 @@
                   odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
               </p>
             </div>
-            <h3 class="accordion-header">Section 2</h3>
-            <div class="accordion-section" data-module="loader" data-loader='{ "url": "_partial.html", "event": "accordion-expand", "contentElement": ".accordion-loader-1" }'>
+            <h3 class="accordion-header">Panel 2</h3>
+            <div class="accordion-panel" data-module="loader" data-loader='{ "url": "_partial.html", "event": "accordion-expand", "contentElement": ".accordion-loader-1" }'>
               <p>
                   Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
                   purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
@@ -69,8 +69,8 @@
               <h4>Loading content on accordion-expand event</h4>
               <div class="accordion-loader-1"></div>
             </div>
-            <h3 class="accordion-header">Section 3</h3>
-            <div class="accordion-section">
+            <h3 class="accordion-header">Panel 3</h3>
+            <div class="accordion-panel">
               <p>
                   Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
                   Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
@@ -83,8 +83,8 @@
                 <li>List item three</li>
               </ul>
             </div>
-            <h3 class="accordion-header">Section 4</h3>
-            <div class="accordion-section">
+            <h3 class="accordion-header">Panel 4</h3>
+            <div class="accordion-panel">
               <p>
                   Cras dictum. Pellentesque habitant morbi tristique senectus et netus
                   et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
@@ -103,8 +103,8 @@
         <div class="test">
           <h2>Accordion with CSS class toggle</h2>
           <div class="accordion" data-module="accordion" data-accordion='{ "slide": false }'>
-            <h3 class="accordion-header">Section 1</h3>
-            <div class="accordion-section">
+            <h3 class="accordion-header">Panel 1</h3>
+            <div class="accordion-panel">
               <p>
                   Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
                   ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
@@ -112,8 +112,8 @@
                   odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
               </p>
             </div>
-            <h3 class="accordion-header">Section 2</h3>
-            <div class="accordion-section">
+            <h3 class="accordion-header">Panel 2</h3>
+            <div class="accordion-panel">
               <p>
                   Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
                   purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
@@ -121,8 +121,8 @@
                   suscipit faucibus urna.
               </p>
             </div>
-            <h3 class="accordion-header">Section 3</h3>
-            <div class="accordion-section">
+            <h3 class="accordion-header">Panel 3</h3>
+            <div class="accordion-panel">
               <p>
                   Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
                   Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
@@ -135,8 +135,8 @@
                 <li>List item three</li>
               </ul>
             </div>
-            <h3 class="accordion-header">Section 4</h3>
-            <div class="accordion-section">
+            <h3 class="accordion-header">Panel 4</h3>
+            <div class="accordion-panel">
               <p>
                   Cras dictum. Pellentesque habitant morbi tristique senectus et netus
                   et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
@@ -153,10 +153,10 @@
         </div>
 
         <div class="test">
-          <h2>Accordion that allows multiple open sections</h2>
+          <h2>Accordion that allows multiple open panels</h2>
           <div class="accordion" data-module="accordion" data-accordion='{ "slide": true, "mode": "toggle" }'>
-            <h3 class="accordion-header">Section 1</h3>
-            <div class="accordion-section">
+            <h3 class="accordion-header">Panel 1</h3>
+            <div class="accordion-panel">
               <p>
                   Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
                   ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
@@ -164,8 +164,8 @@
                   odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
               </p>
             </div>
-            <h3 class="accordion-header">Section 2</h3>
-            <div class="accordion-section">
+            <h3 class="accordion-header">Panel 2</h3>
+            <div class="accordion-panel">
               <p>
                   Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
                   purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
@@ -173,8 +173,8 @@
                   suscipit faucibus urna.
               </p>
             </div>
-            <h3 class="accordion-header">Section 3</h3>
-            <div class="accordion-section">
+            <h3 class="accordion-header">Panel 3</h3>
+            <div class="accordion-panel">
               <p>
                   Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
                   Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
@@ -187,8 +187,8 @@
                 <li>List item three</li>
               </ul>
             </div>
-            <h3 class="accordion-header">Section 4</h3>
-            <div class="accordion-section">
+            <h3 class="accordion-header">Panel 4</h3>
+            <div class="accordion-panel">
               <p>
                   Cras dictum. Pellentesque habitant morbi tristique senectus et netus
                   et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
