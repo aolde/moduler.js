@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <title>Moduler.js - Tabs</title>
+        <meta name="viewport" content="width=device-width">
+        <style>
+            body {
+                background: #F0F0F0;
+                margin: 1em;
+            }
+            .red { background: red; padding: 10px; }
+            .green { background: green; padding: 10px; }
+            .test { width: 30%; float: left; margin-right: 3%;}
+            .clear { clear: both; }
+
+            /* basic styles for tabs */
+            .tabs-handles { 
+                list-style: none; 
+                padding: 0; 
+                margin-bottom: 0; 
+            }
+            .tabs-handle { 
+                background: #ddd; 
+                padding: 10px;
+                cursor: pointer;
+                font-weight: normal;
+                display: inline-block;
+
+                -moz-user-select: none; 
+                -khtml-user-select: none; 
+                -webkit-user-select: none; 
+                -o-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+            .tabs-panel { 
+                display: none;
+                padding: 0 10px;
+                background: #fff;
+                overflow: hidden;
+            }
+
+            .tabs-handle.is-active { background: #fff; }
+            .tabs-panel.is-active { display: block; }
+        </style>
+    </head>
+    <body>
+        <h1>Moduler.js - Tabs module</h1>
+        
+        <div class="clear">
+          <button data-module="dispatcher" data-dispatcher='{ "triggerEvent": "showPanel", "triggerSelector": ".tabs .tabs-handle:last", "triggerContext": "body" }'>Toggle Last Panel</button>
+        </div>
+
+        <div class="test">
+            <div class="tabs" data-module="tabs">
+                <ul class="tabs-handles">
+                    <li class="tabs-handle" data-name="tab-one">Tab One</li>
+                    <li class="tabs-handle" data-name="tab-two">Tab Two</li>
+                </ul>
+
+                <div class="tabs-panels">
+                    <div class="tabs-panel">
+                        <h2>Panel One</h2>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                    </div>
+
+                    <div class="tabs-panel">
+                        <h2>Panel Two</h2>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="test">
+            <div class="tabs" data-module="tabs" data-tabs='{ "selectedPanel": "tab-two" }'>
+                <ul class="tabs-handles">
+                    <li class="tabs-handle" data-name="tab-one">Tab One</li>
+                    <li class="tabs-handle" data-name="tab-two">Tab Two</li>
+                </ul>
+
+                <div class="tabs-panels">
+                    <div class="tabs-panel">
+                        <h2>Panel One</h2>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                    </div>
+
+                    <div class="tabs-panel">
+                        <h2>Panel Two</h2>
+                        <p>This panel will be opened on page load because <code>selectedPanel</code> is set to <code>tab-two</code>.</p>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="test">
+            <div class="tabs" data-module="tabs" data-tabs='{ "showFirst": false, "togglable": true }'>
+                <ul class="tabs-handles">
+                    <li class="tabs-handle" data-name="tab-one">Tab One (ajax)</li>
+                    <li class="tabs-handle" data-name="tab-two">Tab Two</li>
+                </ul>
+
+                <div class="tabs-panels">
+                    <div class="tabs-panel" data-module="loader" data-loader='{ "event": "tab-show", "url": "_partial.html" }'>
+                    </div>
+
+                    <div class="tabs-panel">
+                        <h2>Panel Two</h2>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- library scripts -->
+        <script src="../vendor/jquery-1.10.2.min.js"></script>
+        <script src="../moduler.js"></script>
+        
+        <!-- modules -->
+        <script src="../modules/accordion.js"></script>
+        <script src="../modules/dispatcher.js"></script>
+        <script src="../modules/background.js"></script>
+        <script src="../modules/loader.js"></script>
+        <script src="../modules/tabs.js"></script>
+    </body>
+</html>
