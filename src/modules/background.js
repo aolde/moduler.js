@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
     "use strict";
 
     /* a dummy module to show how something simple is accomplished in moduler.js */

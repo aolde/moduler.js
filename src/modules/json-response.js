@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
     "use strict";
     
     /* example of how a response module could look */

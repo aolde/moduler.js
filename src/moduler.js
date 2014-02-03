@@ -1,5 +1,3 @@
-﻿/* global console, jQuery */
-
 (function (win, doc, $) {
     "use strict";
 
