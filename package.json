@@ -1,6 +1,8 @@
 {
   "name": "Moduler.js",
   "version": "1.0.0",
+  "description": "JavaScript library for binding modules to DOM elements.",
+  "homepage": "https://github.com/simplyio/moduler.js",
   "private": true,
   "devDependencies": {
     "grunt": "latest",
@@ -10,6 +12,11 @@
     "grunt-contrib-compress": "~0.5.3",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-qunit": "~0.3.0",
-    "grunt-bump": "0.0.13"
+    "grunt-bump": "0.0.13",
+    "gulp": "~3.5.1",
+    "gulp-header": "~1.0.2",
+    "jshint-stylish": "~0.1.5",
+    "gulp-qunit": "~0.1.1",
+    "gulp-zip": "~0.1.2"
   }
 }
