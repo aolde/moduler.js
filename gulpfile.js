@@ -17,7 +17,7 @@ var banner = ['/*!',
 
 gulp.task("clean", function () {
     gulp.src("build", { read: false })
-        .pipe(clean({force:true}))
+        .pipe(clean())
 });
 
 gulp.task('scripts', ["clean"], function() {
@@ -38,13 +38,27 @@ gulp.task('scripts', ["clean"], function() {
     gulp.src(["src/modules/*.js"])
         .pipe(jshint({ '-W030': true }))
         .pipe(jshint.reporter('default'))
-        .pipe(gulp.dest("build/modules"))
+        .pipe(gulp.dest("build/modules"));
 });
 
-// The default task (called when you run `gulp`)
-gulp.task('default', function() {
-  gulp.run('scripts');
+gulp.task('package', function () {
+    gulp.src('build/*')
+        .pipe(zip('moduler-js-' + pkg.version + '.zip'))
+        .pipe(gulp.dest('build'));
 
+    gulp.src('build/**')
+        .pipe(zip('moduler-js-' + pkg.version + '-with-modules.zip'))
+        .pipe(gulp.dest('build'));
+})
+
+gulp.task('tests', function () {
+    gulp.src('/tests/tests.html')
+        .pipe(qunit());
+})
+
+// The default task (called when you run `gulp`)
+gulp.task('default', ['tests', 'scripts', 'package'], function() {
+  
   // Watch files and run tasks if they change
   //gulp.watch('src/**', function(event) {
   //  gulp.run('scripts');
