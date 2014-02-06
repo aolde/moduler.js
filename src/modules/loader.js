@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    var loader = moduler('loader', {
+    var moduleObj = moduler('loader', {
         defaults: {
             url: '',
             contentElement: null,
@@ -15,13 +15,23 @@
         
         init: function (module) {
             var settings = module.settings;
+            
+            module.$contentElement = module.settings.contentElement !== null ? $(module.settings.contentElement) : module.$element;
 
             if (settings.event) {
-                module.$element.on(settings.event + '.loader', module, loader.listen.sendRequest);
+                module.$element.on(settings.event + '.loader', module, moduleObj.listen.sendRequest);
             }
 
             if (settings.loadOnInit) {
-                loader.listen.sendRequest(module);
+                moduleObj.listen.sendRequest(module);
+            }
+        },
+
+        updateElementContent: function (html, module) {
+            if (module.settings.insertMode == 'replace') {
+                module.$contentElement.html(response);
+            } else if (module.settings.insertMode == 'append') {
+                module.$contentElement.append(response);
             }
         },
         
@@ -29,7 +39,7 @@
             sendRequest: mo.event(function(module) {
                 var settings = module.settings,
                     element = module.$element,
-                    $contentElement = module.settings.contentElement !== null ? $(module.settings.contentElement) : module.$element;
+                    $contentElement = module.$contentElement;
 
                 if (settings.once && module.isLoaded)
                     return;
@@ -47,16 +57,18 @@
                     if (module.settings.responseModule) {
                         mo.utils.removeModuleFromElement($contentElement, module.settings.responseModule);
                         mo.utils.addModuleToElement($contentElement, module.settings.responseModule, { response: response });
-                    } else if ($contentElement.length && xhr.getResponseHeader('content-type').indexOf('text/html') !== -1) {
-                        if (module.settings.insertMode == 'replace') {
-                            $contentElement.html(response);
-                        } else if (module.settings.insertMode == 'append') {
-                            $contentElement.append(response);
-                        }
+                    } else if (xhr.getResponseHeader('content-type').indexOf('text/html') !== -1) {
+                        moduleObj.updateElementContent(response, module);
                     }
 
                     module.isLoaded = true;
                     element.trigger('loader-done', { response: response });
+                }).error(function(response) {
+                    if (!module.settings.responseModule) {
+                        moduleObj.updateElementContent(response, module);
+                    }
+
+                    element.trigger('loader-error', { response: response });
                 });
 
                 if (settings.once && settings.event) {
