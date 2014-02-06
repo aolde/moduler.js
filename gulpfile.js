@@ -6,6 +6,7 @@ var gulp = require('gulp');
     header = require('gulp-header'),
     zip = require('gulp-zip'),
     qunit = require('gulp-qunit'),
+    path = require('path'),
     pkg = require('./package.json');
 
 var banner = ['/*!',
@@ -16,12 +17,12 @@ var banner = ['/*!',
   ''].join('\n');
 
 gulp.task("clean", function () {
-    gulp.src("build", { read: false })
-        .pipe(clean())
+    return gulp.src("build", { read: false })
+        .pipe(clean());
 });
 
-gulp.task('scripts', ["clean"], function() {
-    gulp.src(['src/moduler.js'])
+gulp.task('library', ["clean"], function() {
+    return gulp.src(['src/moduler.js'])
         .pipe(jshint({ '-W030': true }))
         .pipe(jshint.reporter('default'))
         
@@ -34,30 +35,31 @@ gulp.task('scripts', ["clean"], function() {
         .pipe(uglify({ outSourceMap: true, preserveComments: "some" }))
         
         .pipe(gulp.dest('build'));
+});
 
-    gulp.src(["src/modules/*.js"])
+gulp.task('modules', ['library'], function() {
+    return gulp.src(["src/modules/*", '!**/background.js', '!**/json-response.js', '!**/validation.js'])
         .pipe(jshint({ '-W030': true }))
         .pipe(jshint.reporter('default'))
         .pipe(gulp.dest("build/modules"));
 });
 
-gulp.task('package', function () {
-    gulp.src('build/*')
+gulp.task('package', ['modules', 'library'], function () {
+    gulp.src('*', {cwd: path.join(process.cwd(), 'build')})
         .pipe(zip('moduler-js-' + pkg.version + '.zip'))
         .pipe(gulp.dest('build'));
 
-    gulp.src('build/**')
+    gulp.src(['*', 'modules/*'], {cwd: path.join(process.cwd(), 'build')})
         .pipe(zip('moduler-js-' + pkg.version + '-with-modules.zip'))
         .pipe(gulp.dest('build'));
-})
+});
 
-gulp.task('tests', function () {
-    gulp.src('/tests/tests.html')
+gulp.task('tests', function (cb) {
+    return gulp.src('/tests/tests.html')
         .pipe(qunit());
-})
+});
 
-// The default task (called when you run `gulp`)
-gulp.task('default', ['tests', 'scripts', 'package'], function() {
+gulp.task('default', ['tests', 'modules', 'package'], function() {
   
   // Watch files and run tasks if they change
   //gulp.watch('src/**', function(event) {
