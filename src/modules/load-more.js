@@ -17,6 +17,7 @@
         defaults: {
             url: null,
             event: 'click',
+            data: null,
             contentElement: null, /* selector for element where content should be appended or replaced */
             page: 1, /* the page currently on */
             insertMode : 'append', /* append|replace */
@@ -56,10 +57,10 @@
                 $.ajax({
                     type: 'GET',
                     url: module.settings.url.replace('{page}', module.settings.page),
-                    data: { 
-                        partial: true, 
-                        page: module.settings.page 
-                    }
+                    data: $.extend({
+                        partial: true,
+                        page: module.settings.page
+                    }, module.settings.data)
                 })
                 .always(function () {
                     module.$element.removeClass(module.settings.loadingCssClass);
