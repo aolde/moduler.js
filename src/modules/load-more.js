@@ -17,7 +17,7 @@
         defaults: {
             url: null,
             event: 'click',
-            data: null,
+            data: null, /* extra data to send along the request to server */
             contentElement: null, /* selector for element where content should be appended or replaced */
             page: 1, /* the page currently on */
             insertMode : 'append', /* append|replace */
