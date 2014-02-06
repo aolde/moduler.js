@@ -1,6 +1,18 @@
 (function () {
     "use strict";
     
+    /*
+        Example HTML:
+
+        <div class="products">
+            <!-- list products for page one. -->
+        </div>
+
+        <p>
+            <a href="?page=2" data-module="load-more" data-load-more='{ "url": "/api/products", "contentElement": '.products' }'>Load more</a>
+        </p>
+    */
+
     var moduleObj = moduler('load-more', {
         defaults: {
             url: null,
