@@ -18,13 +18,15 @@
     <body data-module="app">
         <h1>Moduler.js - load-more module</h1>
         
+        <button data-module="dispatcher" data-dispatcher='{ "triggerEvent": "loadFirstPage", "triggerSelector": "a", "triggerContext": "parent" }'>Load first page</button>
+        
         <h2>Paging using mode=append</h2>
         <div class="news-articles-append" data-module="loader" data-loader='{ "url": "_page-1.html", "loadOnInit": true }'>
             Loading...
         </div>
         
         <p>
-            <a href="_page-2.html" data-module="load-more" data-load-more='{ "url": "_page-{page}.html", "contentElement": ".news-articles-append", "mode": "append" }'>
+            <a href="_page-2.html" data-module="load-more" data-load-more='{ "url": "_page-{page}.html", "contentElement": ".news-articles-append", "insertMode": "append" }'>
                 Load next page
             </a>
         </p>
@@ -37,7 +39,7 @@
         </div>
         
         <p>
-            <a href="_page-2.html" data-module="load-more" data-load-more='{ "url": "_page-{page}.html", "contentElement": ".news-articles-replace", "mode": "replace" }'>
+            <a href="_page-2.html" data-module="load-more" data-load-more='{ "url": "_page-{page}.html", "contentElement": ".news-articles-replace", "insertMode": "replace" }'>
                 Load next page
             </a>
         </p>
@@ -51,6 +53,7 @@
         <script src="../app.js"></script>
         <script src="../modules/loader.js"></script>
         <script src="../modules/background.js"></script>
+        <script src="../modules/dispatcher.js"></script>
         <script src="../modules/confirm.js"></script>
         <script src="../modules/load-more.js"></script>
     </body>

@@ -76,6 +76,15 @@
         },
 
         listen: {
+            loadFirstPage: mo.event(function (module) {
+                module.settings.page = 1;
+
+                module.$element.show();
+                module.$contentElement.empty();
+
+                moduleObj.loadPage(module);
+            }),
+
             loadMore: mo.event(function (module, e) {
                 e.preventDefault();
 
