@@ -29,9 +29,9 @@
 
         updateElementContent: function (html, module) {
             if (module.settings.insertMode == 'replace') {
-                module.$contentElement.html(response);
+                module.$contentElement.html(html);
             } else if (module.settings.insertMode == 'append') {
-                module.$contentElement.append(response);
+                module.$contentElement.append(html);
             }
         },
         
