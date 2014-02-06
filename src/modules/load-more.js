@@ -39,6 +39,42 @@
             module.$element.on(module.settings.event, module, moduleObj.listen.loadMore);
         },
 
+        loadPage: function (module) {
+            module.$element.addClass(module.settings.loadingCssClass);
+            module.isLoading = true;
+
+            $.ajax({
+                type: 'GET',
+                url: module.settings.url.replace('{page}', module.settings.page),
+                data: $.extend({
+                    partial: true,
+                    page: module.settings.page
+                }, module.settings.data)
+            })
+            .always(function () {
+                module.$element.removeClass(module.settings.loadingCssClass);
+                module.isLoading = false;
+            })
+            .done(function (response, status, xhr) {
+                if (module.settings.insertMode == 'replace') {
+                    module.$contentElement.html(response);
+                } else if (module.settings.insertMode == 'append') {
+                    module.$contentElement.append(response);
+                }
+
+                if (xhr.getResponseHeader('X-LastPage')) {
+                    // hide the load more button instead of removing it so that 
+                    // other modules can still trigger events
+                    module.$element.hide();
+                }
+
+                module.$element.trigger('load-more-done', { response: response });
+            })
+            .error(function () {
+                module.$element.trigger('load-more-error');
+            });  
+        },
+
         listen: {
             loadMore: mo.event(function (module, e) {
                 e.preventDefault();
@@ -47,43 +83,10 @@
                 if (module.isLoading) {
                     return;
                 }
-
-                module.$element.addClass(module.settings.loadingCssClass);
                 
                 // increase page by one
                 module.settings.page += 1;
-                module.isLoading = true;
-
-                $.ajax({
-                    type: 'GET',
-                    url: module.settings.url.replace('{page}', module.settings.page),
-                    data: $.extend({
-                        partial: true,
-                        page: module.settings.page
-                    }, module.settings.data)
-                })
-                .always(function () {
-                    module.$element.removeClass(module.settings.loadingCssClass);
-                    module.isLoading = false;
-                })
-                .done(function (response, status, xhr) {
-                    if (module.settings.insertMode == 'replace') {
-                        module.$contentElement.html(response);
-                    } else if (module.settings.insertMode == 'append') {
-                        module.$contentElement.append(response);
-                    }
-
-                    if (xhr.getResponseHeader('X-LastPage')) {
-                        // hide the load more button instead of removing it so that 
-                        // other modules can still trigger events
-                        module.$element.hide();
-                    }
-
-                    module.$element.trigger('load-more-done', { response: response });
-                })
-                .error(function () {
-                    module.$element.trigger('load-more-error');
-                });
+                moduleObj.loadPage(module);
             })
         },
 
