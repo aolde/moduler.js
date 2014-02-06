@@ -6,7 +6,6 @@ QUnit.testStart(function (test) {
     moduler('app', {
         init: function () { }
     });
-    //console.groupCollapsed(test.name);
 });
 
 QUnit.testDone(function (test) {
@@ -15,7 +14,6 @@ QUnit.testDone(function (test) {
             delete mo.modules[module];
         }
     }
-    //console.groupEnd();
 });
 
 
