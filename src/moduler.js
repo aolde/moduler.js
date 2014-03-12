@@ -93,8 +93,8 @@
                     $(moduleElement === doc.body ? doc : moduleElement).on(moduleObj.listen, moduleState);
                 }
 
-                moduleObj.init.call(moduleElement, moduleState);
                 $moduleElement.prop('_mo_' + moduleName, moduleState);
+                moduleObj.init.call(moduleElement, moduleState);
             } else {
                 mo.debug && console.warn('module "' + moduleName + '" does not exist, or does not have an init method.');
             }
