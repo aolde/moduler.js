@@ -93,6 +93,7 @@
                     $(moduleElement === doc.body ? doc : moduleElement).on(moduleObj.listen, moduleState);
                 }
 
+                // set the state before calling init to prevent stack overflow if init moves the $element.
                 $moduleElement.prop('_mo_' + moduleName, moduleState);
                 moduleObj.init.call(moduleElement, moduleState);
             } else {
