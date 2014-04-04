@@ -5,15 +5,15 @@ JavaScript library for binding modules to DOM elements
 
 ## Installation
 
+- Download the latest release of moduler.js.
+
 ## Usage Example
-
-
 
 ## Contribution
 
 ## Browser Support
 
-Tested in the following browser, but will likely work in all modern browsers.
+Tested in the following browsers, but will likely work in all modern browsers.
 
 - Internet Explorer 8 and later.
 - Chrome, latest.
