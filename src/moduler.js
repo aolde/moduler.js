@@ -4,7 +4,7 @@
     "use strict";
 
     var mo = {
-        version: '1.0.0',
+        version: '0.1.0',
         debug: false,
 
         // list of all registered module types
