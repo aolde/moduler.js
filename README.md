@@ -20,6 +20,10 @@ Tested in the following browsers, but will likely work in all modern browsers.
 - [Creating your first module](https://github.com/simplyio/moduler.js/wiki/Creating-your-first-module)
 - [Explanation of a module](https://github.com/simplyio/moduler.js/wiki/Example-module-explained)
 
+## Issues
+
+Report bugs through the [issue list](https://github.com/simplyio/moduler.js/issues) on Github.
+
 ## Tests
 
 The QUnit testing framework is used to test most of moduler.js's features. You can run them by opening tests/tests.html. 
