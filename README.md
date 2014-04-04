@@ -3,17 +3,13 @@ moduler.js
 
 JavaScript library for binding modules to DOM elements
 
-## Installation
+## Getting Started
 
-## Usage Example
-
-
-
-## Contribution
+Get the [latest version](https://github.com/simplyio/moduler.js/releases) from the releases in Github and include the moduler.js in your HTML page. jQuery is a prerequisite for moduler.js to work.
 
 ## Browser Support
 
-Tested in the following browser, but will likely work in all modern browsers.
+Tested in the following browsers, but will likely work in all modern browsers.
 
 - Internet Explorer 8 and later.
 - Chrome, latest.
@@ -23,6 +19,10 @@ Tested in the following browser, but will likely work in all modern browsers.
 
 - [Creating your first module](https://github.com/simplyio/moduler.js/wiki/Creating-your-first-module)
 - [Explanation of a module](https://github.com/simplyio/moduler.js/wiki/Example-module-explained)
+
+## Tests
+
+The QUnit testing framework is used to test most of moduler.js's features. You can run them by opening tests/tests.html. 
 
 ## License
 
