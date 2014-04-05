@@ -7,6 +7,7 @@ var gulp = require('gulp');
     zip = require('gulp-zip'),
     qunit = require('gulp-qunit'),
     path = require('path'),
+    replace = require('gulp-replace'),
     pkg = require('./package.json');
 
 var banner = ['/*!',
@@ -27,17 +28,22 @@ gulp.task('library', ["clean"], function() {
         .pipe(jshint.reporter('default'))
         
         .pipe(header(banner, { pkg: pkg, date: dateToYMD(new Date()) } ))
-        
         .pipe(rename("moduler-" + pkg.version + ".js"))
         .pipe(gulp.dest("build"))
 
+        .pipe(replace('*/', "* //@ sourceMappingURL=moduler-" + pkg.version + ".min.js.map\n*/"))
         .pipe(rename("moduler-" + pkg.version + ".min.js"))
         .pipe(uglify({ outSourceMap: true, preserveComments: "some" }))
-        
         .pipe(gulp.dest('build'));
 });
 
-gulp.task('modules', ['library'], function() {
+gulp.task('sourcemap', ['library'], function() {
+    return gulp.src('build/moduler-' + pkg.version + '.min.js.map')
+        .pipe(replace('["?"]', '["moduler-' + pkg.version + '.js"]'))
+        .pipe(gulp.dest('build'));
+});
+
+gulp.task('modules', ['sourcemap'], function() {
     return gulp.src(["src/modules/*", '!**/background.js', '!**/json-response.js', '!**/validation.js'])
         .pipe(jshint({ '-W030': true }))
         .pipe(jshint.reporter('default'))
