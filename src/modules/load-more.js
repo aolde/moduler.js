@@ -1,10 +1,23 @@
 (function () {
     "use strict";
     
+    /*
+        Example HTML:
+
+        <div class="products">
+            <!-- list products for page one. -->
+        </div>
+
+        <p>
+            <a href="?page=2" data-module="load-more" data-load-more='{ "url": "/api/products", "contentElement": '.products' }'>Load more</a>
+        </p>
+    */
+
     var moduleObj = moduler('load-more', {
         defaults: {
             url: null,
             event: 'click',
+            data: null, /* extra data to send along the request to server */
             contentElement: null, /* selector for element where content should be appended or replaced */
             page: 1, /* the page currently on */
             insertMode : 'append', /* append|replace */
@@ -26,7 +39,52 @@
             module.$element.on(module.settings.event, module, moduleObj.listen.loadMore);
         },
 
+        loadPage: function (module) {
+            module.$element.addClass(module.settings.loadingCssClass);
+            module.isLoading = true;
+
+            $.ajax({
+                type: 'GET',
+                url: module.settings.url.replace('{page}', module.settings.page),
+                data: $.extend({
+                    partial: true,
+                    page: module.settings.page
+                }, module.settings.data)
+            })
+            .always(function () {
+                module.$element.removeClass(module.settings.loadingCssClass);
+                module.isLoading = false;
+            })
+            .done(function (response, status, xhr) {
+                if (module.settings.insertMode == 'replace') {
+                    module.$contentElement.html(response);
+                } else if (module.settings.insertMode == 'append') {
+                    module.$contentElement.append(response);
+                }
+
+                if (xhr.getResponseHeader('X-LastPage')) {
+                    // hide the load more button instead of removing it so that 
+                    // other modules can still trigger events
+                    module.$element.hide();
+                }
+
+                module.$element.trigger('load-more-done', { response: response });
+            })
+            .error(function () {
+                module.$element.trigger('load-more-error');
+            });  
+        },
+
         listen: {
+            loadFirstPage: mo.event(function (module) {
+                module.settings.page = 1;
+
+                module.$element.show();
+                module.$contentElement.empty();
+
+                moduleObj.loadPage(module);
+            }),
+
             loadMore: mo.event(function (module, e) {
                 e.preventDefault();
 
@@ -34,43 +92,10 @@
                 if (module.isLoading) {
                     return;
                 }
-
-                module.$element.addClass(module.settings.loadingCssClass);
                 
                 // increase page by one
                 module.settings.page += 1;
-                module.isLoading = true;
-
-                $.ajax({
-                    type: 'GET',
-                    url: module.settings.url.replace('{page}', module.settings.page),
-                    data: { 
-                        partial: true, 
-                        page: module.settings.page 
-                    }
-                })
-                .always(function () {
-                    module.$element.removeClass(module.settings.loadingCssClass);
-                    module.isLoading = false;
-                })
-                .done(function (response, status, xhr) {
-                    if (module.settings.insertMode == 'replace') {
-                        module.$contentElement.html(response);
-                    } else if (module.settings.insertMode == 'append') {
-                        module.$contentElement.append(response);
-                    }
-
-                    if (xhr.getResponseHeader('X-LastPage')) {
-                        // hide the load more button instead of removing it so that 
-                        // other modules can still trigger events
-                        module.$element.hide();
-                    }
-
-                    module.$element.trigger('load-more-done', { response: response });
-                })
-                .error(function () {
-                    module.$element.trigger('load-more-error');
-                });
+                moduleObj.loadPage(module);
             })
         },
 

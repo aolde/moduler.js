@@ -2,7 +2,7 @@
     "use strict";
 
     var mo = {
-        version: '1.0.0',
+        version: '0.1.0',
         debug: false,
 
         // list of all registered module types
@@ -91,8 +91,9 @@
                     $(moduleElement === doc.body ? doc : moduleElement).on(moduleObj.listen, moduleState);
                 }
 
-                moduleObj.init.call(moduleElement, moduleState);
+                // set the state before calling init to prevent stack overflow if init moves the $element.
                 $moduleElement.prop('_mo_' + moduleName, moduleState);
+                moduleObj.init.call(moduleElement, moduleState);
             } else {
                 mo.debug && console.warn('module "' + moduleName + '" does not exist, or does not have an init method.');
             }
