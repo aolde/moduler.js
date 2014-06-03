@@ -41,7 +41,7 @@
                 var moduleElement = $(this),
                     moduleName = moduleElement.attr('data-module'),
                     module = mo.modules[moduleName],
-                    settings = moduleElement.data(moduleName),
+                    settings = mo.utils.parseSettings(moduleElement.attr('data-' + moduleName)),
                     hasMultipleModules = moduleName.indexOf(' ') !== -1;
 
                 if (hasMultipleModules) {
@@ -51,7 +51,7 @@
                         moduleName = moduleNames[i];
 
                         module = mo.modules[moduleName];
-                        settings = moduleElement.data(moduleName);
+                        settings = mo.utils.parseSettings(moduleElement.attr('data-' + moduleName)),
 
                         mo.loadModule(moduleName, this, module, settings);
                     }
@@ -195,6 +195,24 @@
 
             toHyphenCase: function(camelCaseString) {
                 return camelCaseString.replace(/([A-Z])/g, function (letter) { return '-' + letter.toLowerCase(); });
+            },
+
+            parseSettings: function (value) {
+                if (!value) {
+                    return null;
+                }
+
+                if (value[0] === '{') {  // is using JSON syntax
+                    return jQuery.parseJSON(value);
+                }
+
+                var propertyRegex = /(\w+):/g;
+
+                value = value
+                    .replace(propertyRegex, '\"$1\":') // wrap all property names with quotes
+                    .replace(/'/g, '\"'); // replace single-quote character with double quote
+
+                return jQuery.parseJSON('{' + value + '}');
             },
             
             registerDomChangeEvents: function () {
