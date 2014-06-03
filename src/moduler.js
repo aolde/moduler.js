@@ -196,6 +196,9 @@
                 return camelCaseString.replace(/([A-Z])/g, function (letter) { return '-' + letter.toLowerCase(); });
             },
 
+            settingsPropertyRegex: /(\w+):(?:\s|\d|false|true|null|undefined|\{|\[|\"|\')/gi,
+            settingsQuoteRegex: /'/g,
+
             parseSettings: function (value) {
                 if (!value) {
                     return null;
@@ -205,11 +208,9 @@
                     return jQuery.parseJSON(value);
                 }
 
-                var propertyRegex = /(\w+):/g;
-
                 value = value
-                    .replace(propertyRegex, '\"$1\":') // wrap all property names with quotes
-                    .replace(/'/g, '\"'); // replace single-quote character with double quote
+                    .replace(mo.utils.settingsPropertyRegex, '\"$1\":') // wrap all property names with quotes
+                    .replace(mo.utils.settingsQuoteRegex, '\"'); // replace single-quote character with double quote
 
                 return jQuery.parseJSON('{' + value + '}');
             },
