@@ -92,7 +92,6 @@ test("invalid formated settings attribute should throw error", function () {
     throws(function () {
         mo.loadModules();
     }, "Throws error when invalid json");
-
 });
 
 test("settings is an empty object if no settings entered and no defaults", function () {
@@ -221,4 +220,69 @@ asyncTest("when adding elements to the DOM they should register automatically", 
     $fixture.append('<div data-module="test-module"></div>')
     $fixture.find('#div2').html('<div data-module="another-module"></div>')
     $fixture.find('#div1').empty().remove();
+});
+
+
+module('Settings Syntax');
+
+test('can parse boolean settings value', function () {
+    var settings = mo.utils.parseSettings('parsing: true')
+
+    equal(settings.parsing, true);
+});
+
+test('can parse string settings value in double quotes', function () {
+    var settings = mo.utils.parseSettings('name: "Joe"')
+
+    equal(settings.name, 'Joe');
+});
+
+test('can parse string settings value in single quotes', function () {
+    var settings = mo.utils.parseSettings("name: 'Joe'")
+
+    equal(settings.name, 'Joe');
+});
+
+test('can parse numeric settings value', function () {
+    var settings = mo.utils.parseSettings("years: 10")
+
+    equal(settings.years, 10);
+});
+
+test('can parse three properties', function () {
+    var settings = mo.utils.parseSettings("years: 10, name: 'Joe', male: true")
+
+    equal(settings.years, 10);
+    equal(settings.name, 'Joe');
+    equal(settings.male, true);
+});
+
+test('can parse complex property', function () {
+    var settings = mo.utils.parseSettings("person: { name: 'Joe' }")
+
+    equal(settings.person.name, 'Joe');
+});
+
+test('can parse complex property, with other properties', function () {
+    var settings = mo.utils.parseSettings("one: 1, person: { name: 'Joe' }, two: 2")
+
+    equal(settings.person.name, 'Joe');
+    equal(settings.one, 1);
+    equal(settings.two, 2);
+});
+
+test('can parse deep complex property', function () {
+    var settings = mo.utils.parseSettings("person: { name: 'Joe', nested: { one: 1, two: 2 }}");
+
+    equal(settings.person.name, 'Joe');
+    equal(settings.person.nested.one, 1);
+    equal(settings.person.nested.two, 2);
+});
+
+test('can parse array property', function () {
+    var settings = mo.utils.parseSettings("ages: [2, 5, 8]")
+
+    equal($.isArray(settings.ages), true);
+    equal(settings.ages.length, 3);
+    equal(settings.ages[2], 8);
 });
