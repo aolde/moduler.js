@@ -39,6 +39,10 @@ Get the [latest version](https://github.com/simplyio/moduler.js/releases) from t
 
 **3.** Click on "Peter Griffin" and an alert box will appear saying ``Hey Peter Griffin`` because we overrided the default message (``"Hello "``).
 
+## Samples
+
+Every module has a sample that you can view at: https://rawgit.com/simplyio/moduler.js/master/src/index.html
+
 ## Browser Support
 
 Tested in the following browsers, but will likely work in all modern browsers.
