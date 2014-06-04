@@ -11,27 +11,31 @@ Get the [latest version](https://github.com/simplyio/moduler.js/releases) from t
 
 1. Create a new module type:
 
-        (function () {
-            "use strict";
-    
-            var moduleObj = moduler('hello-world', {
-                defaults: {
-                    message: 'Hello ',
-                },
-                
-                init: function (module) {
-                	module.$element.click(function() {
-                		alert(module.settings.message + module.$element.text());
-                	});
-                }
-            });
-        })();
+```JavaScript
+(function () {
+    "use strict";
+
+    var moduleObj = moduler('hello-world', {
+        defaults: {
+            message: 'Hello ',
+        },
+        
+        init: function (module) {
+        	module.$element.click(function() {
+        		alert(module.settings.message + module.$element.text());
+        	});
+        }
+    });
+})();
+```
 
 2. Apply it to an element:
 
-        <div>
-            <span data-module="hello-world" data-hello-world="message: 'Hey '">Peter Griffin</span>
-        </div>
+```html
+<div>
+    <span data-module="hello-world" data-hello-world="message: 'Hey '">Peter Griffin</span>
+</div>
+```
 
 3. Click on "Peter Griffin" and an alert box will appear saying ``Hey Peter Griffin`` because we overrided the default message (``"Hello "``).
 
