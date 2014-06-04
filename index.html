@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Moduler.js by simplyio</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Moduler.js</h1>
+        <p class="header">JavaScript library for binding modules to DOM elements.</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/simplyio/moduler.js/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/simplyio/moduler.js/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/simplyio/moduler.js">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/simplyio">simplyio</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a name="modulerjs" class="anchor" href="#modulerjs"><span class="octicon octicon-link"></span></a>moduler.js</h1>
+
+<p>JavaScript library for binding modules to DOM elements</p>
+
+<h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>Get the <a href="https://github.com/simplyio/moduler.js/releases">latest version</a> from the releases in Github and include the moduler.js in your HTML page. jQuery is a prerequisite for moduler.js to work.</p>
+
+<h2>
+<a name="quick-example" class="anchor" href="#quick-example"><span class="octicon octicon-link"></span></a>Quick Example</h2>
+
+<p><strong>1.</strong> Create a new module type:</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="s2">"use strict"</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="nx">moduleObj</span> <span class="o">=</span> <span class="nx">moduler</span><span class="p">(</span><span class="s1">'hello-world'</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">message</span><span class="o">:</span> <span class="s1">'Hello '</span><span class="p">,</span>
+        <span class="p">},</span>
+
+        <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">module</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">module</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">alert</span><span class="p">(</span><span class="nx">module</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">message</span> <span class="o">+</span> <span class="nx">module</span><span class="p">.</span><span class="nx">$element</span><span class="p">.</span><span class="nx">text</span><span class="p">());</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">})();</span>
+</pre></div>
+
+<p><strong>2.</strong> Apply it to an element:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">data-module=</span><span class="s">"hello-world"</span> <span class="na">data-hello-world=</span><span class="s">"message: 'Hey '"</span><span class="nt">&gt;</span>Peter Griffin<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+
+<p><strong>3.</strong> Click on "Peter Griffin" and an alert box will appear saying <code>Hey Peter Griffin</code> because we overrided the default message (<code>"Hello "</code>).</p>
+
+<h2>
+<a name="browser-support" class="anchor" href="#browser-support"><span class="octicon octicon-link"></span></a>Browser Support</h2>
+
+<p>Tested in the following browsers, but will likely work in all modern browsers.</p>
+
+<ul>
+<li>Internet Explorer 8 and later.</li>
+<li>Chrome, latest.</li>
+<li>Firefox, latest.</li>
+</ul><h2>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
+
+<ul>
+<li><a href="https://github.com/simplyio/moduler.js/wiki/Creating-your-first-module">Creating your first module</a></li>
+<li><a href="https://github.com/simplyio/moduler.js/wiki/Example-module-explained">Explanation of a module</a></li>
+</ul><h2>
+<a name="issues" class="anchor" href="#issues"><span class="octicon octicon-link"></span></a>Issues</h2>
+
+<p>Report bugs through the <a href="https://github.com/simplyio/moduler.js/issues">issue list</a> on Github.</p>
+
+<h2>
+<a name="tests" class="anchor" href="#tests"><span class="octicon octicon-link"></span></a>Tests</h2>
+
+<p>The QUnit testing framework is used to test most of moduler.js's features. You can run them by opening tests/tests.html. </p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Moduler.js is freely distributable under the terms of the MIT license.</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
