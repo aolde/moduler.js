@@ -9,7 +9,7 @@ Get the [latest version](https://github.com/simplyio/moduler.js/releases) from t
 
 ## Quick Example
 
-1. Create a new module type:
+**1.** Create a new module type:
 
 ```JavaScript
 (function () {
@@ -29,7 +29,7 @@ Get the [latest version](https://github.com/simplyio/moduler.js/releases) from t
 })();
 ```
 
-2. Apply it to an element:
+**2.** Apply it to an element:
 
 ```html
 <div>
@@ -37,7 +37,7 @@ Get the [latest version](https://github.com/simplyio/moduler.js/releases) from t
 </div>
 ```
 
-3. Click on "Peter Griffin" and an alert box will appear saying ``Hey Peter Griffin`` because we overrided the default message (``"Hello "``).
+**3.** Click on "Peter Griffin" and an alert box will appear saying ``Hey Peter Griffin`` because we overrided the default message (``"Hello "``).
 
 ## Browser Support
 
