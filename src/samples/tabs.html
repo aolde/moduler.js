@@ -49,7 +49,7 @@
         <h1>Moduler.js - Tabs module</h1>
         
         <div class="clear">
-          <button data-module="dispatcher" data-dispatcher='{ "triggerEvent": "showPanel", "triggerSelector": ".tabs .tabs-handle:last", "triggerContext": "body" }'>Toggle Last Panel</button>
+          <button data-module="dispatcher" data-dispatcher="triggerEvent: 'showPanel', triggerSelector: '.tabs .tabs-handle:last', triggerContext: 'body'">Toggle Last Panel</button>
         </div>
 
         <div class="test">
@@ -75,7 +75,7 @@
         </div>
 
         <div class="test">
-            <div class="tabs" data-module="tabs" data-tabs='{ "selectedPanel": "tab-two" }'>
+            <div class="tabs" data-module="tabs" data-tabs="selectedPanel: 'tab-two'">
                 <ul class="tabs-handles">
                     <li class="tabs-handle" data-name="tab-one">Tab One</li>
                     <li class="tabs-handle" data-name="tab-two">Tab Two</li>
@@ -97,14 +97,14 @@
         </div>
 
         <div class="test">
-            <div class="tabs" data-module="tabs" data-tabs='{ "showFirst": false, "togglable": true }'>
+            <div class="tabs" data-module="tabs" data-tabs="showFirst: false, togglable: true">
                 <ul class="tabs-handles">
                     <li class="tabs-handle" data-name="tab-one">Tab One (ajax)</li>
                     <li class="tabs-handle" data-name="tab-two">Tab Two</li>
                 </ul>
 
                 <div class="tabs-panels">
-                    <div class="tabs-panel" data-module="loader" data-loader='{ "event": "tab-show", "url": "_partial.html" }'>
+                    <div class="tabs-panel" data-module="loader" data-loader="event: 'tab-show', url: '_partial.html'">
                     </div>
 
                     <div class="tabs-panel">
