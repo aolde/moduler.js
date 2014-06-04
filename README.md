@@ -58,7 +58,7 @@ Report bugs through the [issue list](https://github.com/simplyio/moduler.js/issu
 
 ## Tests
 
-The QUnit testing framework is used to test most of moduler.js's features. You can run them by opening tests/tests.html. 
+The QUnit testing framework is used to test most of moduler.js's features. You can run them by opening tests/tests.html or navigate to http://simplyio.github.io/moduler.js/tests/tests.html.
 
 ## License
 
