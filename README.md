@@ -7,6 +7,34 @@ JavaScript library for binding modules to DOM elements
 
 Get the [latest version](https://github.com/simplyio/moduler.js/releases) from the releases in Github and include the moduler.js in your HTML page. jQuery is a prerequisite for moduler.js to work.
 
+## Quick Example
+
+1. Create a new module type:
+
+	(function () {
+	    "use strict";
+
+	    var moduleObj = moduler('hello-world', {
+	        defaults: {
+	            message: 'Hello ',
+	        },
+	        
+	        init: function (module) {
+	        	module.$element.click(function() {
+	        		alert(module.settings.message + module.$element.text());
+	        	});
+	        }
+	    });
+	})();
+
+2. Apply it to an element:
+
+	<div>
+		<span data-module="hello-world" data-hello-world="message: 'Hey '">Peter Griffin</span>
+	</div>
+
+3. Click on "Peter Griffin" and an alert box will appear saying "Hey Peter Griffin" because we overrided the default message ("Hello ").
+
 ## Browser Support
 
 Tested in the following browsers, but will likely work in all modern browsers.
