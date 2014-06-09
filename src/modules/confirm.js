@@ -23,7 +23,7 @@
             })
         },
         
-        destroy: function () {
+        destroy: function (module) {
             module.$element.off(module.settings.event, moduleObj.listen.showConfirm);
         }
     });
