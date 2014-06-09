@@ -54,7 +54,14 @@
                     settings = module.settings,
                     handleIndex = module.$handles.index($handle),
                     $panel = module.$panels.eq(handleIndex);
-            
+
+                // if event was triggered on a link inside "handles" then we try to find the handle element now
+                if (!$handle.is(module.settings.handles)) {
+                    $handle = $handle.closest(module.settings.handles);
+                    handleIndex = module.$handles.index($handle);
+                    $panel = module.$panels.eq(handleIndex);
+                }
+
                 module.$handles.not($handle).removeClass(settings.activeClass).trigger('tab-hide');
                 module.$panels.not($panel).removeClass(settings.activeClass).trigger('tab-hide');
 
