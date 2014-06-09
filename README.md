@@ -1,7 +1,7 @@
 moduler.js
 ==========
 
-JavaScript library for binding modules to DOM elements
+> JavaScript library for binding modules to DOM elements.
 
 ## Getting Started
 
