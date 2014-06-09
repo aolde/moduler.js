@@ -17,7 +17,7 @@
     <body>
         <h1>Moduler.js - form-poster module</h1>
 
-        <form data-module="form-poster validation" data-form-poster='{ "responseModule": "json-response", "event": "validation-valid" }' action="http://httpbin.org/get" method="GET">
+        <form data-module="form-poster validation" data-form-poster="responseModule: 'json-response', event: 'validation-valid'" action="http://httpbin.org/get" method="GET">
             <h2>Form with GET</h2>
             <p>First name:* <input type="text" class="required" name="firstname" value="Joe"></p>
             <p>Last name:* <input type="text" class="required" name="lastname" value="Doe"></p>
@@ -43,7 +43,7 @@
 
         <div id="htmlResponse" class="hide2" style="overflow: auto; max-height: 100px; border: 1px solid; padding: 10px;"></div>
 
-        <div data-module="form-poster loader" data-loader='{ "event": "form-poster-done", "url": "/partial.html", "contentElement": "#htmlResponse" }'>
+        <div data-module="form-poster loader" data-loader="event: 'form-poster-done', url: '_partial.html', contentElement: '#htmlResponse'">
             <form action="http://httpbin.org/html" method="GET">
                 <h2>Form with HTML response</h2>
                 <p>First name: <input type="text" name="firstname" value="Joe"></p>
