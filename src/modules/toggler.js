@@ -5,7 +5,9 @@
         defaults: {
             event: 'click',
             contentElement: null,
-            cssClass: 'hide'
+            cssClass: 'hide',
+            preventDefault: true,
+            once: false
         },
 
         init: function (module) {
@@ -24,7 +26,17 @@
                 module.$contentElement.trigger('toggler-hidden');
             }),
 
-            toggleVisibility: mo.event(function (module) {
+            toggleVisibility: mo.event(function (module, e) {
+                if (module.settings.preventDefault) {
+                    e.preventDefault();
+                }
+
+                if (module.settings.once && module.toggled) {
+                    return;
+                } else if (module.settings.once) {
+                    module.toggled = true;
+                }
+
                 module.$contentElement.toggleClass(module.settings.cssClass);
                 module.$contentElement.trigger('toggler-toggeled');
             })
