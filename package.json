@@ -1,6 +1,6 @@
 {
   "name": "Moduler.js",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "JavaScript library for binding modules to DOM elements.",
   "homepage": "https://github.com/simplyio/moduler.js",
   "private": true,
