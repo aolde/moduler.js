@@ -26,7 +26,8 @@
             mode: 'accordion', // accordion|toggle
             slide: true,
             slideDelay: 400,
-            expandFirst: false
+            expandFirst: false,
+            selectedPanel: null // the panel to show at page load (optional).
         },
         
         init: function (module) {
@@ -41,7 +42,9 @@
 
             module.$element.addClass('js-ready');
 
-            if (module.settings.expandFirst) {
+            if (module.settings.selectedPanel) {
+                module.$headers.filter('[data-name=' + module.settings.selectedPanel + ']').trigger(module.settings.event);
+            } else if (module.settings.expandFirst) {
                 module.$headers.first().trigger(module.settings.event);
             }
         },
@@ -72,6 +75,13 @@
                     settings = module.settings,
                     headerIndex = module.$headers.index($header),
                     $panel = module.$panels.eq(headerIndex);
+
+                // if event was triggered on a link inside "headers" then we try to find the handle element now
+                if (!$header.is(module.settings.handles)) {
+                    $header = $header.closest(module.settings.headers);
+                    headerIndex = module.$headers.index($header);
+                    $panel = module.$panels.eq(headerIndex);
+                }
 
                 if (settings.mode == 'accordion') {
                     module.$headers.not($header).removeClass(settings.activeClass).trigger('accordion-collapse');
