@@ -5,10 +5,12 @@
         defaults: {
             submitButton: 'input[type=submit], button[type=submit]',
             url: null, // override the form's url. in case you want different url for ajax requests.
+            data: null, /* extra data to send along the request to server */
             event: 'submit',
             contentElement: null,
             responseModule: null,
-            loadingCssClass: 'form-loading'
+            loadingCssClass: 'form-loading',
+            responseSegment: false // update only a segment of the response (contentElement segment)
         },
 
         init: function(module) {
@@ -33,7 +35,7 @@
                 $.ajax({
                     type: formMethod,
                     url: url,
-                    data: $form.serialize()
+                    data: $.extend(moduleObj.serializeFormObject($form), module.settings.data)
                 }).always(function () {
                     $submitButton.prop('disabled', false);
                     module.$element.removeClass(module.settings.loadingCssClass);
@@ -41,7 +43,10 @@
                     if (module.settings.responseModule) {
                         mo.utils.removeModuleFromElement($contentElement, module.settings.responseModule);
                         mo.utils.addModuleToElement($contentElement, module.settings.responseModule, { response: response });
-                    } else if (module.settings.contentElement && xhr.getResponseHeader('content-type').indexOf('text/html') !== -1) {
+                    } else if ($contentElement.length) {
+                        if (module.settings.responseSegment) {
+                            response = $($.parseHTML(response)).find(module.settings.contentElement).html();
+                        }
                         $contentElement.html(response);
                     }
 
@@ -50,6 +55,20 @@
                     module.$element.trigger('form-poster-error');
                 });
             })
+        },
+
+        serializeFormObject: function($element) {
+            var obj = {};
+            $.each($element.serializeArray(), function (_, item) {
+                if (obj.hasOwnProperty(item.name)) {
+                    obj[item.name] = $.makeArray(obj[item.name]);
+                    obj[item.name].push(item.value);
+                }
+                else {
+                    obj[item.name] = item.value;
+                }
+            });
+            return obj;
         },
 
         destroy: function (module) {
