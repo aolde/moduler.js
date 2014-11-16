@@ -9,7 +9,7 @@
         </div>
 
         <p>
-            <a href="?page=2" data-module="load-more" data-load-more='{ "url": "/api/products", "contentElement": '.products' }'>Load more</a>
+            <a href="?page=2" data-module="load-more" data-load-more="url: '/api/products', contentElement: '.products'">Load results {from}-{to}</a>
         </p>
     */
 
@@ -21,7 +21,8 @@
             contentElement: null, /* selector for element where content should be appended or replaced */
             page: 1, /* the page currently on */
             insertMode : 'append', /* append|replace */
-            loadingCssClass: 'loading'
+            loadingCssClass: 'loading',
+            pageSize: null // size of each page, used when displaying page range in button. ("Results from 11-20")
         },
 
         init: function (module) {
@@ -37,6 +38,16 @@
             module.$contentElement = module.settings.contentElement !== null ? $(module.settings.contentElement) : module.$element;
 
             module.$element.on(module.settings.event, module, moduleObj.listen.loadMore);
+
+            var linkHtml = module.$element.html();
+            var shouldDisplayPageRange = linkHtml.indexOf('{from}') != -1;
+
+            if (shouldDisplayPageRange) {
+                module.shouldDisplayPageRange = true;
+                module.linkHtml = linkHtml;
+
+                moduleObj.updateLinkText(module);
+            }
         },
 
         loadPage: function (module) {
@@ -68,11 +79,24 @@
                     module.$element.hide();
                 }
 
+                if (module.shouldDisplayPageRange) {
+                    moduleObj.updateLinkText(module);
+                }
+
                 module.$element.trigger('load-more-done', { response: response });
             })
             .error(function () {
                 module.$element.trigger('load-more-error');
             });  
+        },
+
+        updateLinkText: function(module) {
+            var from = (module.settings.page * module.settings.pageSize);
+            var newLinkText = module.linkHtml
+                .replace('{from}', from + 1)
+                .replace('{to}', from + module.settings.pageSize);
+
+            module.$element.html(newLinkText);
         },
 
         listen: {
