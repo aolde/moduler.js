@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <title>Moduler.js - Modal</title>
+        <meta name="viewport" content="width=device-width">
+        <style>
+        body {
+            font-family: sans-serif;
+        }
+        .red { background: red; padding: 10px; }
+        .green { background: green; padding: 10px; }
+
+        a.loading { text-decoration: none; }
+        a.loading:after { content: '...'; }
+
+        .hide { display: none; }
+        .field-validation-error { background: rgba(255, 0, 0, 0.3);; }
+
+        .Modal {
+          background: rgba(0, 0, 0, 0.6);
+          position: fixed;
+          backface-visibility: hidden;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 10;
+          display: none;
+          padding: 1em;
+        }
+        .Modal.Modal--active {
+          display: block;
+        }
+        .Modal-dialog {
+          box-sizing: border-box;
+          position: relative;
+          background: #fbfaf9;
+          margin: 10% auto 0;
+          margin: 10vh auto 0;
+          border-radius: 1em;
+          z-index: 11;
+          width: 100%;
+          max-width: 550px;
+          padding: 1em;
+        }
+        .Modal-heading {
+            margin-top: 0;
+            margin-bottom: 0.2em;
+        }
+        .Modal-content {
+          max-height: 50vh;
+          overflow: auto;
+          overflow-x: hidden;
+        }
+        .Modal-footer {
+          background: #ebe8e2;
+          margin-top: 1em;
+          padding: .8em;
+          border-bottom-left-radius: .5em;
+          border-bottom-right-radius: .5em;
+          text-align: right;
+        }
+        .Modal-close {
+          position: absolute;
+          top: .5em;
+          right: .6em;
+          font-size: 1.6em;
+          text-decoration: none;
+          padding: 0.1em 0.3em 0.1em;
+          background: #ebe8e2;
+          line-height: 1em;
+          border-radius: 50%;
+          color: #333;
+        }
+        .Modal-close:hover {
+          background: #ebe8e2;
+        }
+
+        </style>
+    </head>
+    <body data-module="app lazy">
+        <h1>Moduler.js - modal</h1>
+        
+        <p><a href="#" class="Button" data-module="modal" data-modal="contentElement: '.js-demoModal'">Open modal</a></p>
+
+        <p>
+          <a href="#" class="Button" data-module="confirm loader modal" 
+            data-loader="event: 'confirm-yes', url: '_partial.html', contentElement: '.js-demoModal2Content', once: false"
+            data-modal="contentElement: '.js-demoModal2', event: 'loader-done'">
+              Open modal after confirm dialog and ajax load.
+          </a>
+        </p>
+    
+        <section class="Modal js-demoModal">
+            <div class="Modal-dialog">
+                <h2 class="Modal-heading">Modal header</h2>
+                <a class="Modal-close js-close" href="#">&times;</a>
+                
+                <div class="Modal-content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean maximus eget ipsum id mattis. Aliquam nec erat sed justo ullamcorper congue eget id orci. Phasellus eleifend rhoncus lacinia.</p>
+                </div>
+                
+                <div class="Modal-footer">
+                    <a href="#" class="js-close">Cancel</a>
+                    <button>Send</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="Modal js-demoModal2">
+            <div class="Modal-dialog">
+                <h2 class="Modal-heading">Modal header</h2>
+                <a class="Modal-close js-close" href="#">&times;</a>
+                
+                <div class="Modal-content js-demoModal2Content">
+
+                </div>
+                
+                <div class="Modal-footer">
+                    <a href="#" class="js-close">Cancel</a>
+                    <button>Send</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- library scripts -->
+        <script src="../vendor/jquery-1.10.2.min.js"></script>
+        <script src="../moduler.js"></script>
+        
+        <!-- modules -->
+        <script src="../app.js"></script>
+        <script src="../modules/loader.js"></script>
+        <script src="../modules/background.js"></script>
+        <script src="../modules/dispatcher.js"></script>
+        <script src="../modules/confirm.js"></script>
+        <script src="../modules/lazy.js"></script>
+        <script src="../modules/modal.js"></script>
+    </body>
+</html>
