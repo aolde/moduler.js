@@ -280,9 +280,71 @@ test('can parse deep complex property', function () {
 });
 
 test('can parse array property', function () {
-    var settings = mo.utils.parseSettings("ages: [2, 5, 8]")
+    var settings = mo.utils.parseSettings("ages: [2, 5, 8]");
 
     equal($.isArray(settings.ages), true);
     equal(settings.ages.length, 3);
     equal(settings.ages[2], 8);
 });
+
+test('can parse object array property', function () {
+    var settings = mo.utils.parseSettings("people:[{ name: 'Sarah' }, {name: 'Peter'}]");
+
+    equal($.isArray(settings.people), true);
+    equal(settings.people.length, 2);
+    equal(settings.people[1].name, 'Peter');
+});
+
+test('can parse property with special chars', function () {
+    var settings = mo.utils.parseSettings("$property-with_characters1: true");
+
+    equal(settings['$property-with_characters1'], true);
+});
+
+module('Module Late Init');
+
+asyncTest('module with custom init event should not be init on load', function () {
+    expect(1);
+
+    var tim = setTimeout( function  () {
+        ok(true, 'module was not initalized on load');
+        start();
+    }, 100);
+
+    moduler('test-module', {
+        defaults: { name: 'Jane Doe' },
+
+        init: function () {
+            clearTimeout(tim);
+
+            ok(false, 'module should not be initalized on load');
+            start();
+        }
+    });
+    mo.utils.addModuleToElement('#div1', 'test-module:late-event');
+});
+
+asyncTest('can delay init of module', function () {
+    expect(1);
+
+    var tim = setTimeout( function  () {
+        ok(false, 'module was not initalized by "late-event"');
+        start();
+    }, 500);
+
+    moduler('test-module', {
+        defaults: { name: 'Jane Doe' },
+
+        init: function () {
+            clearTimeout(tim);
+
+            ok(true, 'module was initalized by "late-event"');
+            start();
+        }
+    });
+    mo.utils.addModuleToElement('#div1', 'test-module:late-event');
+    
+    $('#div1').trigger('late-event'); 
+});
+
+

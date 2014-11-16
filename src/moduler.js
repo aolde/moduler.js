@@ -37,31 +37,30 @@
 
             $('[data-module]', container).each(function () {
                 var moduleElement = $(this),
-                    moduleName = moduleElement.attr('data-module'),
-                    module = mo.modules[moduleName],
-                    settings = mo.utils.parseSettings(moduleElement.attr('data-' + moduleName)),
-                    hasMultipleModules = moduleName.indexOf(' ') !== -1;
+                    moduleNames = moduleElement.attr('data-module').split(' ');
 
-                if (hasMultipleModules) {
-                    var moduleNames = moduleName.split(' ');
+                for (var i in moduleNames) {
+                    var moduleName = moduleNames[i],
+                        initEvent = null;
 
-                    for (var i in moduleNames) {
-                        moduleName = moduleNames[i];
-
-                        module = mo.modules[moduleName];
-                        settings = mo.utils.parseSettings(moduleElement.attr('data-' + moduleName)),
-
-                        mo.loadModule(moduleName, this, module, settings);
+                    if (moduleName.indexOf(':') > -1) {
+                        var parts = moduleName.split(':');
+                        moduleName = parts[0];
+                        initEvent = parts[1];
                     }
-                } else {
-                    mo.loadModule(moduleName, this, module, settings);
+
+                    var module = mo.modules[moduleName],
+                        settingsAttr = moduleElement.attr('data-' + moduleName),
+                        settings = mo.utils.parseSettings(settingsAttr);
+
+                    mo.loadModule(moduleName, this, module, settings, initEvent);
                 }
             });
 
             mo.debug && console.groupEnd();
         },
         
-        loadModule: function (moduleName, moduleElement, moduleObj, settings) {
+        loadModule: function (moduleName, moduleElement, moduleObj, settings, initEvent) {
             if (typeof (settings) === "string")
                 throw new Error('Settings attribute for module "' + moduleName + '" should be JSON-formated: data-' + moduleName + '=\'{ "property": "value" }\'. Current value ("' + settings + '") is not JSON.');
 
@@ -80,12 +79,12 @@
                 }
 
                 var moduleState = {
-                        name: moduleName,
-                        element: moduleElement,
-                        $element: $moduleElement,
-                        settings: settings || {},
-                        obj: moduleObj
-                    };
+                    name: moduleName,
+                    element: moduleElement,
+                    $element: $moduleElement,
+                    settings: settings || {},
+                    obj: moduleObj
+                };
 
                 if ('listen' in moduleObj) {
                     $(moduleElement === doc.body ? doc : moduleElement).on(moduleObj.listen, moduleState);
@@ -93,7 +92,15 @@
 
                 // set the state before calling init to prevent stack overflow if init moves the $element.
                 $moduleElement.prop('_mo_' + moduleName, moduleState);
-                moduleObj.init.call(moduleElement, moduleState);
+
+                // wait for initEvent to trigger instead of running init() immediately
+                if (initEvent) {
+                    $moduleElement.one(initEvent, function () {
+                        moduleObj.init.call(moduleElement, moduleState);                    
+                    });
+                } else {
+                    moduleObj.init.call(moduleElement, moduleState);
+                }
             } else {
                 mo.debug && console.warn('module "' + moduleName + '" does not exist, or does not have an init method.');
             }
@@ -196,7 +203,7 @@
                 return camelCaseString.replace(/([A-Z])/g, function (letter) { return '-' + letter.toLowerCase(); });
             },
 
-            settingsPropertyRegex: /(\w+):(?:\s|\d|false|true|null|undefined|\{|\[|\"|\')/gi,
+            settingsPropertyRegex: /([\w\-$]+):(?:|\s|\d|false|true|null|undefined|\{|\[|\"|\')/gi,
             settingsQuoteRegex: /'/g,
 
             parseSettings: function (value) {
@@ -210,7 +217,7 @@
 
                 value = value
                     .replace(mo.utils.settingsPropertyRegex, '\"$1\":') // wrap all property names with quotes
-                    .replace(mo.utils.settingsQuoteRegex, '\"'); // replace single-quote character with double quote
+                    .replace(mo.utils.settingsQuoteRegex, '\"'); // replace single-quote character with double quotes
 
                 return jQuery.parseJSON('{' + value + '}');
             },
@@ -253,6 +260,62 @@
                         return jQueryDOMChanged(this, 'html');
                     }
                 });
+            },
+
+            loadedScripts: {}, // container for scripts that have been added to the document
+
+            loadScript: function loadScript(url, condition) {
+                var dfd = $.Deferred();
+
+                // "condition()" returns true if the necessary objects are loaded.
+                if (condition && condition()) {
+                    dfd.resolve();
+                    return dfd;
+                }
+
+                var originalUrl = url;
+
+                if (mo.utils.loadedScripts[originalUrl]) {
+                    return mo.utils.loadedScripts[originalUrl];
+                }
+
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+
+                // script will call a callback when it's loaded and ready.
+                if (url.indexOf('{callback}') > -1) {
+                    var callbackName = 'callback' + Math.random().toString().replace('.', '');
+                    url = url.replace('{callback}', callbackName);
+
+                    window[callbackName] = function () {
+                        dfd.resolve();
+
+                        try {
+                            delete window[callbackName]; 
+                        } catch (e) {
+                            window[callbackName] = undefined; // IE8 doesn't support "delete"
+                        }
+                    };
+                } else {
+                    if (script.readyState) {  // IE
+                        script.onreadystatechange = function() {
+                            if (script.readyState === 'loaded' || script.readyState === 'complete') {
+                                script.onreadystatechange = null;
+                                dfd.resolve();
+                            }
+                        };
+                    } else {  // Others
+                        script.onload = function() {
+                            dfd.resolve();
+                        };
+                    }
+                }
+
+                mo.utils.loadedScripts[originalUrl] = dfd;
+                script.src = url;
+                document.body.appendChild(script);
+
+                return dfd.promise();
             }
         };
     })();
