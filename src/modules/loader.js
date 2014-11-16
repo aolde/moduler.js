@@ -16,7 +16,7 @@
         init: function (module) {
             var settings = module.settings;
             
-            module.$contentElement = module.settings.contentElement !== null ? $(module.settings.contentElement) : module.$element;
+            module.$contentElement = moduleObj.getContentElement(module);
 
             if (settings.event) {
                 module.$element.on(settings.event + '.loader', module, moduleObj.listen.sendRequest);
@@ -34,9 +34,18 @@
                 module.$contentElement.append(html);
             }
         },
+
+        getContentElement: function (module) {
+            return module.settings.contentElement !== null ? 
+                $(module.settings.contentElement) : 
+                module.$element;
+        },
         
         listen: {
             sendRequest: mo.event(function(module) {
+                // refresh reference to contentElement
+                module.$contentElement = moduleObj.getContentElement(module);
+                 
                 var settings = module.settings,
                     element = module.$element,
                     $contentElement = module.$contentElement;
