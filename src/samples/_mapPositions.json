@@ -1,0 +1,44 @@
+[  
+   {  
+      "lat":51.507351,
+      "lng": -0.127758,
+      "title":"City of London",
+      "description":"This is London.",
+      "url":"http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FLondon"
+   },
+   {  
+   	  "lat":59.329323,
+      "lng": 18.068581,
+      "title":"City of Stockholm",
+      "description":"This is Stockholm.",
+      "url":"http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FStockholm"
+   },
+   {  
+   	  "lat":60.173324,
+      "lng": 24.941025,
+      "title":"City of Helsinki",
+      "description":"This is Helsinki.",
+      "url":"http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FHelsinki"
+   },
+   {  
+   	  "lat":50.075538,
+      "lng":14.437800,
+      "title":"City of Prague",
+      "description":"This is Prague.",
+      "url":"http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FPrague"
+   },
+   {  
+   	  "lat":52.520007,
+      "lng":13.404954,
+      "title":"City of Berlin",
+      "description":"This is Berlin.",
+      "url":"http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FBerlin"
+   },
+   {  
+   	  "lat":52.370216,
+      "lng": 4.895168,
+      "title":"City of Amsterdam",
+      "description":"This is Amsterdam.",
+      "url":"http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAmsterdam"
+   }
+]

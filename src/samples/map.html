@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <title>Moduler.js - Maps</title>
+        <meta name="viewport" content="width=device-width">
+        <style>
+        body {
+            font-family: sans-serif;
+        }
+        .red { background: red; padding: 10px; }
+        .green { background: green; padding: 10px; }
+
+        a.loading { text-decoration: none; }
+        a.loading:after { content: '...'; }
+
+        .hide { display: none; }
+        .clear {clear:both;}
+
+        .Box {
+            float: left;
+            width: 33%;
+        }
+
+        .Map {
+            width: 100%;
+            height: 300px;
+            background: rgba(0,0,0,0.1);
+        }
+        </style>
+    </head>
+    <body data-module="app lazy">
+        <h1>Moduler.js - map</h1>
+        
+        <div class="Box" style="width: 100%">
+            <h4>Map with pins at London and Stockholm</h3> 
+            <div class="Map" data-module="map" data-map="data: [{ address: 'London' }, { address: 'Stockholm' }]"></div>
+        </div>
+
+        <div class="Box">
+            <h4>Map of Stockholm</h3> 
+            <div class="Map" data-module="map" data-map="data: { address: 'Stockholm' }"></div>
+        </div>
+
+        <div class="Box">
+            <h4>Map of London</h3> 
+            <div class="Map" data-module="map" data-map="data: { lat: 51.5073509, lng: -0.1277583 }"></div>
+        </div>
+
+        <div class="Box clear">
+            <div class="js-maps"></div>
+        </div>
+        <div class="Box clear">
+            <button>Add map</button>
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="Box" style="width: 66%">
+            <h4>Map with info windows</h3> 
+            <div class="Map" data-module="map:lazy" data-map="showInfoWindow: true, data: [{ address: 'London', title: 'City of London', description: 'This is London.', url: 'http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FLondon' }, { address: 'Stockholm', title: 'City of Stockholm', description: 'This is Stockholm.', url: 'http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FStockholm' }]"></div>
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="Box" style="width: 66%">
+            <h4>Loading pins from JSON url with marker clusterer</h3> 
+            <div class="Map" data-module="map:lazy" data-map="showInfoWindow: true, useMarkerClusterer: true, dataUrl: '_mapPositions.json'"></div>
+        </div>
+
+        <div class="clear"></div>
+
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+
+        <p>Com sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+
+        <p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+
+        <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
+
+        <p>Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.</p>
+
+        <p>Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.</p>
+
+        <p>Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.</p>
+
+        <p>Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.</p>
+
+        <p>Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus.</p>
+
+        <p>Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,</p>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+
+        <p>Com sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+
+        <p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+
+        <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
+
+        <p>Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.</p>
+
+        <p>Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.</p>
+
+        <p>Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.</p>
+
+        <p>Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.</p>
+
+        <p>Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus.</p>
+
+        <p>Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,</p>
+
+        <div class="Box" style="float: left;">
+            <h3>Lazy loaded map of St. Pauls, London</h3> 
+            <div class="Map" data-module="map:lazy" data-map="data: { address: 'St. Pauls, London, UK'}, zoom: 16"></div>
+        </div>
+
+        <div style="clear:both"></div>
+
+        <p>Com sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+
+        <p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+
+        <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
+
+        <p>Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.</p>
+
+        <p>Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.</p>
+
+        <p>Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.</p>
+
+        <!-- library scripts -->
+        <script src="../vendor/jquery-1.10.2.min.js"></script>
+        <script src="../moduler.js"></script>
+        
+        <!-- modules -->
+        <script src="../app.js"></script>
+        <script src="../modules/loader.js"></script>
+        <script src="../modules/background.js"></script>
+        <script src="../modules/dispatcher.js"></script>
+        <script src="../modules/confirm.js"></script>
+        <script src="../modules/map.js"></script>
+        <script src="../modules/lazy.js"></script>
+
+        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=&amp;sensor=false"></script> -->
+
+        <script>
+          $('button').click(function () {
+            $('.js-maps').append('<h3>Async loaded map</h3></h3><div class="Map" data-module="map" data-map="data: {address:\'Berlin\'}"></div>')
+          })
+        </script>
+    </body>
+</html>
