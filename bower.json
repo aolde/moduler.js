@@ -1,0 +1,22 @@
+{
+  "name": "moduler-js",
+  "version": "0.4.0",
+  "homepage": "https://github.com/simplyio/moduler.js",
+  "authors": [
+    "simplyio <andreas@simply.io>"
+  ],
+  "description": "JavaScript library for binding modules to DOM elements.",
+  "main": "moduler.js",
+  "keywords": [
+    "component",
+    "module"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

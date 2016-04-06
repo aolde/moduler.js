@@ -11,7 +11,7 @@ Get the [latest version](https://github.com/simplyio/moduler.js/releases) from t
 
 **1.** Create a new module type:
 
-```JavaScript
+```js
 (function () {
     "use strict";
 
